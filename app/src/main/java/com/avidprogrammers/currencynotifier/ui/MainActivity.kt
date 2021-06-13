@@ -1,7 +1,8 @@
-package com.avidprogrammers.currencynotifier
+package com.avidprogrammers.currencynotifier.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.avidprogrammers.currencynotifier.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
