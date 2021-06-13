@@ -2,6 +2,22 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation">
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/forex">
 
+    <fragment
+        android:id="@+id/forex"
+        android:name="com.avidprogrammers.currencynotifier.ui.forex.forex"
+        android:label="forex_fragment"
+        tools:layout="@layout/forex_fragment" />
+    <fragment
+        android:id="@+id/crypto"
+        android:name="com.avidprogrammers.currencynotifier.ui.crypto.crypto"
+        android:label="crypto_fragment"
+        tools:layout="@layout/crypto_fragment" />
+    <fragment
+        android:id="@+id/stocks"
+        android:name="com.avidprogrammers.currencynotifier.ui.stocks.stocks"
+        android:label="stocks_fragment"
+        tools:layout="@layout/stocks_fragment" />
 </navigation>
