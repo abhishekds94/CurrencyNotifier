@@ -6,6 +6,7 @@
     tools:context=".ui.crypto.crypto">
 
     <TextView
+        android:id="@+id/cryptoValue"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Crypto" />

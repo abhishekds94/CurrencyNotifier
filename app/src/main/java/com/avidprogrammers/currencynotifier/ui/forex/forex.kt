@@ -1,12 +1,18 @@
 package com.avidprogrammers.currencynotifier.ui.forex
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.avidprogrammers.currencynotifier.R
+import com.avidprogrammers.currencynotifier.data.forex.ForexApiService
+import kotlinx.android.synthetic.main.forex_fragment.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class forex : Fragment() {
 
@@ -25,8 +31,15 @@ class forex : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ForexViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = ViewModelProvider(this).get(ForexViewModel::class.java)
+
+        val apiService = ForexApiService()
+        GlobalScope.launch(Dispatchers.Main) {
+            val currencyValue = apiService.getCurrentValueAsync("USDINR").await()
+            Log.d("value", "value-${currencyValue.currencyVal}")
+            forexValue.text = currencyValue.currencyVal
+        }
+
     }
 
 }
