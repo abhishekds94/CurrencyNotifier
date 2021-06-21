@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/forexFragment"
-        android:name="com.avidprogrammers.currencynotifier.ui.forex.forex"
+        android:name="com.avidprogrammers.currencynotifier.ui.forex.Forex"
         android:label="forex_fragment"
         tools:layout="@layout/forex_fragment" />
     <fragment
         android:id="@+id/cryptoFragment"
-        android:name="com.avidprogrammers.currencynotifier.ui.crypto.crypto"
+        android:name="com.avidprogrammers.currencynotifier.ui.crypto.Crypto"
         android:label="crypto_fragment"
         tools:layout="@layout/crypto_fragment" />
     <fragment
         android:id="@+id/stocksFragment"
-        android:name="com.avidprogrammers.currencynotifier.ui.stocks.stocks"
+        android:name="com.avidprogrammers.currencynotifier.ui.stocks.Stocks"
         android:label="stocks_fragment"
         tools:layout="@layout/stocks_fragment" />
 </navigation>

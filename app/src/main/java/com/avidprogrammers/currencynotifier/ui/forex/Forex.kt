@@ -14,10 +14,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class forex : Fragment() {
+class Forex : Fragment() {
 
     companion object {
-        fun newInstance() = forex()
+        fun newInstance() = Forex()
     }
 
     private lateinit var viewModel: ForexViewModel

@@ -1,31 +1,31 @@
-package com.avidprogrammers.currencynotifier.ui.crypto
+package com.avidprogrammers.currencynotifier.ui.stocks
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.avidprogrammers.currencynotifier.R
 
-class crypto : Fragment() {
+class Stocks : Fragment() {
 
     companion object {
-        fun newInstance() = crypto()
+        fun newInstance() = Stocks()
     }
 
-    private lateinit var viewModel: CryptoViewModel
+    private lateinit var viewModel: StocksViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.crypto_fragment, container, false)
+        return inflater.inflate(R.layout.stocks_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CryptoViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(StocksViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
