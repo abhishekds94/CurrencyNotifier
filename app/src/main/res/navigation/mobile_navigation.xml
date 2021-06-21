@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/forex">
+    app:startDestination="@id/forexFragment">
 
     <fragment
-        android:id="@+id/forex"
+        android:id="@+id/forexFragment"
         android:name="com.avidprogrammers.currencynotifier.ui.forex.forex"
         android:label="forex_fragment"
         tools:layout="@layout/forex_fragment" />
     <fragment
-        android:id="@+id/crypto"
+        android:id="@+id/cryptoFragment"
         android:name="com.avidprogrammers.currencynotifier.ui.crypto.crypto"
         android:label="crypto_fragment"
         tools:layout="@layout/crypto_fragment" />
     <fragment
-        android:id="@+id/stocks"
+        android:id="@+id/stocksFragment"
         android:name="com.avidprogrammers.currencynotifier.ui.stocks.stocks"
         android:label="stocks_fragment"
         tools:layout="@layout/stocks_fragment" />

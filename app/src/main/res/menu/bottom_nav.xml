@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/forexValues"
+        android:id="@+id/forexFragment"
         android:icon="@drawable/ic_forex"
         android:title="Forex" />
 
     <item
-        android:id="@+id/cryptoValues"
+        android:id="@+id/cryptoFragment"
         android:icon="@drawable/ic_crypto"
         android:title="Crypto"/>
 
     <item
-        android:id="@+id/stockValues"
+        android:id="@+id/stocksFragment"
         android:icon="@drawable/ic_stocks"
         android:title="Stocks"/>
 
