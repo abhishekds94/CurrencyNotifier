@@ -16,6 +16,14 @@ import kotlinx.coroutines.launch
 
 class Forex : Fragment() {
 
+    var currencyNames = arrayOf("Select", "USD", "GBP", "EURO")
+    var flags = intArrayOf(
+        R.drawable.ic_select,
+        R.drawable.ic_usd,
+        R.drawable.ic_gbp,
+        R.drawable.ic_euro
+    )
+
     companion object {
         fun newInstance() = Forex()
     }

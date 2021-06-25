@@ -58,11 +58,17 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Select Source Currency"
+                            android:text="Select Source"
                             android:gravity="center_horizontal"
                             android:fontFamily="@font/open_sans"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
+
+                        <Spinner
+                            android:id="@+id/simpleSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="50dp" />
 
                     </FrameLayout>
 
@@ -74,7 +80,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Select Destination Currency"
+                            android:text="Select Destination"
                             android:gravity="center_horizontal"
                             android:fontFamily="@font/open_sans"
                             android:textColor="@color/black"
@@ -88,6 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Check Value"
+                    android:textColor="@color/white"
                     android:background="@drawable/bg_button" />
 
             </LinearLayout>
@@ -113,7 +120,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="The exchange value for 1 USD to 1 INR,"
+                    android:text="The exchange value for USD to INR,"
                     android:gravity="bottom"
                     android:textColor="@color/black"
                     android:fontFamily="@font/open_sans_light"
@@ -135,7 +142,7 @@
                     android:layout_marginTop="30dp"
                     android:text="set Notification"
                     android:fontFamily="@font/open_sans_semibold"
-                    android:background="@drawable/bg_button" />
+                    android:background="@drawable/bg_button_notification" />
 
             </LinearLayout>
 
