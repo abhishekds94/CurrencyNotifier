@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.avidprogrammers.currencynotifier.R
 import com.avidprogrammers.currencynotifier.data.forex.ForexApiService
+import com.avidprogrammers.currencynotifier.data.network.ConnectivityInterceptorImpl
+import com.avidprogrammers.currencynotifier.data.network.ForexNetworkDataSourceImpl
 import kotlinx.android.synthetic.main.forex_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -41,11 +44,16 @@ class Forex : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ForexViewModel::class.java)
 
-        val apiService = ForexApiService()
+        val apiService = ForexApiService(ConnectivityInterceptorImpl(this.requireContext()))
+        val forexNetworkDataSource = ForexNetworkDataSourceImpl(apiService)
+
+        forexNetworkDataSource.downloadedForex.observe(viewLifecycleOwner, Observer {
+            forexValue.text = it.currencyVal.toString()
+            Log.d("value", "value-${it.currencyVal}")
+        })
+
         GlobalScope.launch(Dispatchers.Main) {
-            val currencyValue = apiService.getCurrentValueAsync("USDINR").await()
-            Log.d("value", "value-${currencyValue.currencyVal}")
-            forexValue.text = currencyValue.currencyVal
+            forexNetworkDataSource.fetchCurrentValue("USDINR")
         }
 
     }

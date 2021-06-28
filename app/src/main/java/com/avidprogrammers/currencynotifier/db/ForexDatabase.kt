@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.avidprogrammers.currencynotifier.data.forex.response.ForexResponse
+import com.avidprogrammers.currencynotifier.db.entity.ForexResponse
 
 @Database(
     entities = [ForexResponse::class],

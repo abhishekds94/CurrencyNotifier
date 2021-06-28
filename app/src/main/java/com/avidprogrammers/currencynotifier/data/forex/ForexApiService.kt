@@ -1,7 +1,8 @@
 package com.avidprogrammers.currencynotifier.data.forex
 
 import androidx.annotation.Keep
-import com.avidprogrammers.currencynotifier.data.forex.response.ForexResponse
+import com.avidprogrammers.currencynotifier.data.network.ConnectivityInterceptor
+import com.avidprogrammers.currencynotifier.db.entity.ForexResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
@@ -22,7 +23,9 @@ interface ForexApiService {
     ): Deferred<ForexResponse>
 
     companion object {
-        operator fun invoke(): ForexApiService {
+        operator fun invoke(
+            connectivityInterceptor: ConnectivityInterceptor
+        ): ForexApiService {
             val requestInterceptor = Interceptor { chain ->
                 val url = chain.request()
                     .url()
@@ -39,6 +42,7 @@ interface ForexApiService {
 
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(requestInterceptor)
+                .addInterceptor(connectivityInterceptor)
                 .build()
 
             return Retrofit.Builder()
