@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Currency Notifier</string>
+    <string name="avid">© Avid Programmers</string>
+    <string name="appNameSplash">Currency Notifier</string>
 </resources>
