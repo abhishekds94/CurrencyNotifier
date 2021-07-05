@@ -8,6 +8,7 @@ import com.avidprogrammers.currencynotifier.data.network.ConnectivityInterceptor
 import com.avidprogrammers.currencynotifier.data.network.ForexNetworkDataSource
 import com.avidprogrammers.currencynotifier.data.network.ForexNetworkDataSourceImpl
 import com.avidprogrammers.currencynotifier.db.ForexDatabase
+import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -25,5 +26,10 @@ class ForexValue : Application(), KodeinAware {
         bind() from singleton { ForexApiService(instance()) }
         bind<ForexNetworkDataSource>() with singleton { ForexNetworkDataSourceImpl(instance()) }
         bind<ForexRepository>() with singleton { ForexRepositoryImpl(instance(), instance()) }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        AndroidThreeTen.init(this)
     }
 }

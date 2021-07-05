@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.time.ZonedDateTime
+import org.threeten.bp.ZonedDateTime
 
 class ForexRepositoryImpl(
     private val ForexValueDao: ForexValueDao,
