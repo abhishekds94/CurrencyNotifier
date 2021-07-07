@@ -5,31 +5,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.avidprogrammers.currencynotifier.R
-import com.avidprogrammers.currencynotifier.data.forex.ForexApiService
-import com.avidprogrammers.currencynotifier.data.network.ConnectivityInterceptorImpl
-import com.avidprogrammers.currencynotifier.data.network.ForexNetworkDataSourceImpl
+import com.avidprogrammers.currencynotifier.ui.base.ScopedFragment
 import kotlinx.android.synthetic.main.forex_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class Forex : Fragment() {
-
-    var currencyNames = arrayOf("Select", "USD", "GBP", "EURO")
-    var flags = intArrayOf(
-        R.drawable.ic_select,
-        R.drawable.ic_usd,
-        R.drawable.ic_gbp,
-        R.drawable.ic_euro
-    )
-
-    companion object {
-        fun newInstance() = Forex()
-    }
+class Forex : ScopedFragment(), KodeinAware {
+    override val kodein by closestKodein()
+    private val viewModelFactory: ForexViewModelFactory by instance()
 
     private lateinit var viewModel: ForexViewModel
 
@@ -42,20 +30,22 @@ class Forex : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ForexViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory)
+            .get(ForexViewModel::class.java)
 
-        val apiService = ForexApiService(ConnectivityInterceptorImpl(this.requireContext()))
-        val forexNetworkDataSource = ForexNetworkDataSourceImpl(apiService)
+        bindUI()
 
-        forexNetworkDataSource.downloadedForex.observe(viewLifecycleOwner, Observer {
-            forexValue.text = it.currencyVal.toString()
-            Log.d("value", "value-${it.currencyVal}")
-        })
-
-        GlobalScope.launch(Dispatchers.Main) {
-            forexNetworkDataSource.fetchCurrentValue("USDINR")
-        }
-
+        Log.d("value", "value123")
     }
+
+    private fun bindUI() = launch {
+        Log.d("value", "value456")
+        val currentValue = viewModel.forex.await()
+        currentValue.observe(viewLifecycleOwner, Observer {
+            if (it == null) return@Observer
+            forexValue.text = it.toString()
+            Log.d("value", "value-${it}")
+        })
+    }.cancel()
 
 }
