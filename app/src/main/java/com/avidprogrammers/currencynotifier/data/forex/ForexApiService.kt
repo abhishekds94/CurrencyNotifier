@@ -2,7 +2,7 @@ package com.avidprogrammers.currencynotifier.data.forex
 
 import androidx.annotation.Keep
 import com.avidprogrammers.currencynotifier.data.network.ConnectivityInterceptor
-import com.avidprogrammers.currencynotifier.db.entity.ForexResponse
+import com.avidprogrammers.currencynotifier.data.network.response.ForexResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor

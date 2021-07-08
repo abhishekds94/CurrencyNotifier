@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.avidprogrammers.currencynotifier.data.forex.ForexApiService
-import com.avidprogrammers.currencynotifier.db.entity.ForexResponse
+import com.avidprogrammers.currencynotifier.data.network.response.ForexResponse
 import com.avidprogrammers.currencynotifier.internal.NoConnectivityException
 
 class ForexNetworkDataSourceImpl(

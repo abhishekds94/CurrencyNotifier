@@ -1,4 +1,4 @@
-package com.avidprogrammers.currencynotifier.data.forex.response
+package com.avidprogrammers.currencynotifier.data.network.response
 
 
 data class ForexResponse(

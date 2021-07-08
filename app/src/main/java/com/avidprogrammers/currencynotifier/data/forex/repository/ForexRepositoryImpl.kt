@@ -2,8 +2,9 @@ package com.avidprogrammers.currencynotifier.data.forex.repository
 
 import androidx.lifecycle.LiveData
 import com.avidprogrammers.currencynotifier.data.network.ForexNetworkDataSource
+import com.avidprogrammers.currencynotifier.data.network.response.ForexResponse
 import com.avidprogrammers.currencynotifier.db.ForexValueDao
-import com.avidprogrammers.currencynotifier.db.entity.ForexResponse
+import com.avidprogrammers.currencynotifier.db.entity.ForexResponseDB
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -21,7 +22,7 @@ class ForexRepositoryImpl(
         }
     }
 
-    override suspend fun getCurrentValue(): LiveData<ForexResponse> {
+    override suspend fun getCurrentValue(): LiveData<ForexResponseDB> {
         return withContext(Dispatchers.IO) {
             initForexData()
             return@withContext ForexValueDao.getForexValue()
@@ -30,7 +31,7 @@ class ForexRepositoryImpl(
 
     private fun persistFetchedForexValue(forexValue: ForexResponse) {
         GlobalScope.launch(Dispatchers.IO) {
-            ForexValueDao.upsert(ForexResponse(currencyCode = String(), currencyVal = String()))
+            ForexValueDao.upsert(ForexResponseDB(currencyCode = String(), currencyVal = String()))
         }
     }
 

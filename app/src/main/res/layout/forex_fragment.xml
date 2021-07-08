@@ -91,6 +91,7 @@
                 </LinearLayout>
 
                 <Button
+                    android:id="@+id/btn_checkValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Check Value"

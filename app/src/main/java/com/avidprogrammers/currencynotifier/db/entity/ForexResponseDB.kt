@@ -7,7 +7,7 @@ const val FOREX_VALUE_ID = 0
 
 @Entity(tableName = "forex_value")
 
-data class ForexResponse(
+data class ForexResponseDB(
     var currencyCode: String,
     var currencyVal: String
 ) {

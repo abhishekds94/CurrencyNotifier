@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.avidprogrammers.currencynotifier.db.entity.ForexResponse
+import com.avidprogrammers.currencynotifier.db.entity.ForexResponseDB
 
 @Database(
-    entities = [ForexResponse::class],
+    entities = [ForexResponseDB::class],
     version = 1
 )
 abstract class ForexDatabase : RoomDatabase() {
