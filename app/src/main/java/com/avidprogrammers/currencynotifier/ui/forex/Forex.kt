@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.avidprogrammers.currencynotifier.R
 import com.avidprogrammers.currencynotifier.ui.base.ScopedFragment
@@ -42,11 +43,11 @@ class Forex : ScopedFragment(), KodeinAware {
     private fun bindUI() = launch {
         Log.d("value", "value456")
         val currentValue = viewModel.forex
-//        currentValue.observe(this@Forex, Observer {
-//            if (it == null) return@Observer
-        forexValue.text = viewModel.forex.toString()
-        Log.d("value", "value-${viewModel.forex}")
-//        })
+        currentValue.observe(viewLifecycleOwner, Observer {
+            if (it == null) return@Observer
+            forexValue.text = it.currencyVal
+            Log.d("value", "value-${it}")
+        })
     }
 
 }

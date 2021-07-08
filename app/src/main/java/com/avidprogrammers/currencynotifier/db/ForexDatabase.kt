@@ -8,7 +8,8 @@ import com.avidprogrammers.currencynotifier.db.entity.ForexResponseDB
 
 @Database(
     entities = [ForexResponseDB::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class ForexDatabase : RoomDatabase() {
     abstract fun ForexValueDao(): ForexValueDao
