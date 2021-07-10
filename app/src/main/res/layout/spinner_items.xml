@@ -5,23 +5,26 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/spinnerImg"
+        android:id="@+id/sourceForexImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:padding="5dp"
         android:src="@mipmap/ic_launcher"
+        android:layout_marginStart="5dp"
         android:contentDescription="spinnerImg" />
 
     <TextView
-        android:id="@+id/spinnerText"
+        android:id="@+id/sourceForexName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Demo"
+        android:text="Demoardgfaergaergaergaergaergaeraergaeragragaergsedrg"
         android:fontFamily="@font/open_sans"
         android:textColor="@color/black"
         android:textSize="16sp"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp" />
+        android:layout_marginEnd="20dp" />
 
 </LinearLayout>
