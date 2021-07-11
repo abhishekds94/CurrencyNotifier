@@ -50,57 +50,30 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:orientation="horizontal"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
                         android:weightSum="2"
                         android:baselineAligned="false"
                         android:layout_marginBottom="20dp">
 
-                        <FrameLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
+                        <Spinner
+                            android:id="@+id/forexSourceSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:spinnerMode="dropdown"
+                            android:background="@drawable/spinner_background"
+                            tools:listitem="@layout/spinner_items" />
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Select Source"
-                                android:gravity="center_horizontal"
-                                android:fontFamily="@font/open_sans"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <Spinner
-                                android:id="@+id/forexSourceSpinner"
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp"
-                                android:layout_gravity="center"
-                                android:spinnerMode="dropdown" />
-
-                        </FrameLayout>
-
-                        <FrameLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Select Destination"
-                                android:gravity="center_horizontal"
-                                android:fontFamily="@font/open_sans"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <Spinner
-                                android:id="@+id/forexTargetSpinner"
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp"
-                                android:layout_gravity="center"
-                                android:spinnerMode="dropdown" />
-
-                        </FrameLayout>
+                        <Spinner
+                            android:id="@+id/forexTargetSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_gravity="center"
+                            android:spinnerMode="dropdown"
+                            android:background="@drawable/spinner_background"
+                            tools:listitem="@layout/spinner_items" />
 
                     </LinearLayout>
 
