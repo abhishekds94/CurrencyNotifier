@@ -21,7 +21,7 @@ class SourceForexSpinnerAdapter(ctx: Context, countries: ArrayList<SpinnerCountr
         return createItemView(position, convertView, parent)
     }
 
-    fun createItemView(position: Int, recycledView: View?, parent: ViewGroup): View {
+    private fun createItemView(position: Int, recycledView: View?, parent: ViewGroup): View {
         val country = getItem(position)
 
         val view = recycledView ?: LayoutInflater.from(context).inflate(
