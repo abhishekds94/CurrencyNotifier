@@ -82,6 +82,7 @@ class Forex : ScopedFragment(), KodeinAware {
         })
         comboSelected = sourceSelected + targetSelected
         Toast.makeText(context, "Combo-$comboSelected", Toast.LENGTH_SHORT).show()
+        viewModel.selectedCurrencyPair(comboSelected)
     }
 
     private fun setForexSourceAdapterSpinner() {

@@ -4,6 +4,6 @@ import com.avidprogrammers.currencynotifier.db.entity.ForexResponseDB
 import kotlinx.coroutines.flow.Flow
 
 interface ForexRepository {
-    suspend fun getCurrentValue()
+    suspend fun getCurrentValue(value: String)
     fun getCurrentForexValue(): Flow<ForexResponseDB>
 }

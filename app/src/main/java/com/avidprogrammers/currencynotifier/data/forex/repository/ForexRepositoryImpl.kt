@@ -25,10 +25,9 @@ class ForexRepositoryImpl(
 
     private val value: Flow<ForexResponseDB> = ForexValueDao.getForexValue()
 
-    override suspend fun getCurrentValue() {
+    override suspend fun getCurrentValue(value: String) {
         return withContext(Dispatchers.IO) {
-            initForexData()
-//            return@withContext ForexValueDao.getForexValue()
+            initForexData(value)
         }
     }
 
@@ -47,17 +46,17 @@ class ForexRepositoryImpl(
         }
     }
 
-    private suspend fun initForexData() {
+    private suspend fun initForexData(value: String) {
         if (isFetchForexNeeded(ZonedDateTime.now().minusMinutes(61)))
-            fetchForexValue()
-        Log.d("[Forex123]", "[Forex123] initForexData -" + fetchForexValue().toString())
+            fetchForexValue(value)
+        Log.d("[Forex123]", "[Forex123] initForexData -" + fetchForexValue(value).toString())
     }
 
-    private suspend fun fetchForexValue() {
+    private suspend fun fetchForexValue(value: String) {
         Log.d("[Forex123]", "[Forex123] value -fetching")
-        ForexNetworkDataSource.fetchCurrentValue(currencyCode = "USDINR")
-        val value = ForexNetworkDataSource.fetchCurrentValue(currencyCode = "USDINR")
-        Log.d("[Forex123]", "[Forex123] value -$value")
+        ForexNetworkDataSource.fetchCurrentValue(currencyCode = value)
+        val valueCur = ForexNetworkDataSource.fetchCurrentValue(currencyCode = value)
+        Log.d("[Forex123]", "[Forex123] value -$valueCur")
     }
 
     private fun isFetchForexNeeded(lastFetchTime: ZonedDateTime): Boolean {

@@ -22,13 +22,18 @@ class ForexValue : Application(), KodeinAware {
     override val kodein = Kodein.lazy {
         import(androidXModule(this@ForexValue))
 
-        bind() from singleton { ForexDatabase(instance()) }
-        bind() from singleton { instance<ForexDatabase>().ForexValueDao() }
-        bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
-        bind() from singleton { ForexApiService(instance()) }
-        bind<ForexNetworkDataSource>() with singleton { ForexNetworkDataSourceImpl(instance()) }
-        bind<ForexRepository>() with singleton { ForexRepositoryImpl(instance(), instance()) }
-        bind() from provider { ForexViewModelFactory(instance()) }
+        bind() from this.singleton { ForexDatabase(this.instance()) }
+        bind() from this.singleton { this.instance<ForexDatabase>().ForexValueDao() }
+        this.bind<ConnectivityInterceptor>() with this.singleton { ConnectivityInterceptorImpl(this.instance()) }
+        bind() from this.singleton { ForexApiService(this.instance()) }
+        this.bind<ForexNetworkDataSource>() with this.singleton { ForexNetworkDataSourceImpl(this.instance()) }
+        this.bind<ForexRepository>() with this.singleton {
+            ForexRepositoryImpl(
+                this.instance(),
+                this.instance()
+            )
+        }
+        bind() from this.provider { ForexViewModelFactory(this.instance()) }
     }
 
     override fun onCreate() {

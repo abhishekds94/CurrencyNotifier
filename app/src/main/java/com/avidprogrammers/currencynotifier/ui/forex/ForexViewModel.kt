@@ -17,7 +17,14 @@ class ForexViewModel(
 //    }
     init {
         viewModelScope.launch {
-            forexRepository.getCurrentValue()
+            val value = null
+            value?.let { forexRepository.getCurrentValue(it) }
+        }
+    }
+
+    fun selectedCurrencyPair(value: String) {
+        viewModelScope.launch {
+            forexRepository.getCurrentValue(value)
         }
     }
 
