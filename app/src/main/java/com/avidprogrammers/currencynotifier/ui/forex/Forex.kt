@@ -1,7 +1,6 @@
 package com.avidprogrammers.currencynotifier.ui.forex
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -73,16 +72,23 @@ class Forex : ScopedFragment(), KodeinAware {
 
     private fun bindUI() = launch {
         forexValueContainer.visibility = View.VISIBLE
-        Log.d("value", "value456")
         val currentValue = viewModel.forex
         currentValue.observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
-            forexValue.text = it.currencyVal
-            Log.d("value", "value-${it}")
+            if (comboSelected == "USDBTC" || comboSelected == "GBPBTC" || comboSelected == "EURBTC") {
+                forexValue.text = it.currencyVal
+            } else {
+                val number: Float = it.currencyVal.toFloat()
+                val number2digits: Float = String.format("%.2f", number).toFloat()
+                forexValue.text = number2digits.toString()
+            }
         })
         comboSelected = sourceSelected + targetSelected
         Toast.makeText(context, "Combo-$comboSelected", Toast.LENGTH_SHORT).show()
         viewModel.selectedCurrencyPair(comboSelected)
+
+        forexValText.text = getString(R.string.forexValText, sourceSelected, targetSelected)
+
     }
 
     private fun setForexSourceAdapterSpinner() {

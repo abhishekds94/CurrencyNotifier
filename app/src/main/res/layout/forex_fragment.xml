@@ -108,9 +108,10 @@
                     android:padding="20dp">
 
                     <TextView
+                        android:id="@+id/forexValText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="The exchange value for USD to INR,"
+                        tools:text="The exchange value for USD to INR,"
                         android:gravity="bottom"
                         android:textColor="@color/black"
                         android:fontFamily="@font/open_sans_light"
