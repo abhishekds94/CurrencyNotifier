@@ -2,57 +2,115 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp">
+
+    <View
+        android:layout_width="70dp"
+        android:layout_height="4dp"
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Hello Modal BottomSheet"
+        android:layout_marginTop="20dp"
+        android:text="Enter the target value for the notification"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:fontFamily="@font/open_sans_semibold"
+        android:textSize="18sp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/ll_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#3FBCED"
-        android:text="Hello Modal BottomSheet"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <EditText
-        android:id="@+id/edittext"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColorHint="@color/black"
-        android:hint="123123"
         android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <EditText
+            android:id="@+id/valueOne"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:hint="0"
+            android:textSize="28sp"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"/>
+
+        <EditText
+            android:id="@+id/valueTwo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:hint="9"
+            android:textSize="28sp"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"/>
+
+        <EditText
+            android:id="@+id/valueThree"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:hint="9"
+            android:textSize="28sp"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:textSize="28sp"
+            android:text="."
+            android:gravity="bottom"
+            android:textColor="@color/black"
+            android:layout_marginEnd="10dp"/>
+
+        <EditText
+            android:id="@+id/valueFour"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:hint="0"
+            android:textSize="28sp"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"/>
+
+        <EditText
+            android:id="@+id/valueFive"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:hint="0"
+            android:textSize="28sp"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"/>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#2E64D1"
-        android:text="Hello"
-        android:textColor="#FFFFFF"
+        android:background="@drawable/bg_button_notification"
+        android:text="Notify me!"
         android:textSize="18sp"
-        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/open_sans_semibold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edittext" />
+        app:layout_constraintTop_toBottomOf="@+id/ll_layout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
