@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="10dp">
+    android:paddingBottom="20dp">
 
     <View
         android:layout_width="70dp"
@@ -45,27 +45,27 @@
             android:id="@+id/valueOne"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:hint="0"
             android:textSize="28sp"
             android:gravity="center"
+            android:maxLength="1"
             android:layout_marginEnd="10dp"/>
 
         <EditText
             android:id="@+id/valueTwo"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:hint="9"
             android:textSize="28sp"
             android:gravity="center"
+            android:maxLength="1"
             android:layout_marginEnd="10dp"/>
 
         <EditText
             android:id="@+id/valueThree"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:hint="9"
             android:textSize="28sp"
             android:gravity="center"
+            android:maxLength="1"
             android:layout_marginEnd="10dp"/>
 
         <TextView
@@ -81,24 +81,24 @@
             android:id="@+id/valueFour"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:hint="0"
             android:textSize="28sp"
             android:gravity="center"
+            android:maxLength="1"
             android:layout_marginEnd="10dp"/>
 
         <EditText
             android:id="@+id/valueFive"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:hint="0"
             android:textSize="28sp"
             android:gravity="center"
+            android:maxLength="1"
             android:layout_marginEnd="10dp"/>
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/bt_setNotification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_button_notification"

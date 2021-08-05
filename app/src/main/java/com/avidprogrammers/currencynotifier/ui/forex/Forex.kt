@@ -1,15 +1,22 @@
 package com.avidprogrammers.currencynotifier.ui.forex
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextUtils
+import android.text.TextWatcher
+import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.avidprogrammers.currencynotifier.R
 import com.avidprogrammers.currencynotifier.ui.base.ScopedFragment
+import kotlinx.android.synthetic.main.forex_bottom_sheet.*
 import kotlinx.android.synthetic.main.forex_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -171,5 +178,4 @@ class Forex : ScopedFragment(), KodeinAware {
         }
         adapter.notifyDataSetChanged()
     }
-
 }
