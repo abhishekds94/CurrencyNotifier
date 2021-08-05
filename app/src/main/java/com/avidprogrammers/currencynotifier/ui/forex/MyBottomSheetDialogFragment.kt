@@ -41,12 +41,40 @@ class MyBottomSheetDialogFragment : BottomSheetDialogFragment() {
         textInput()
 
         bt_setNotification.setOnClickListener {
-            if (valueOne.text.toString()!="0"){
-                val enteredVal = valueOne.text.toString() + valueTwo.text.toString() + valueThree.text.toString() + "." + valueFour.text.toString() + valueFive.text.toString()
-                Toast.makeText(context, "entered val:::$enteredVal", Toast.LENGTH_SHORT).show()
-            } else if (valueTwo.text.toString()!="0") {
-                val enteredVal = valueThree.text.toString() + "." + valueFour.text.toString() + valueFive.text.toString()
-                Toast.makeText(context, "entered val:::$enteredVal", Toast.LENGTH_SHORT).show()
+
+            if (valueOne.text.isNotEmpty() && valueTwo.text.isNotEmpty() && valueThree.text.isNotEmpty() && valueFour.text.isNotEmpty() && valueFive.text.isNotEmpty()){
+                when {
+                    valueOne.text.toString()!="0" -> {
+                        val enteredVal =
+                            valueOne.text.toString() + valueTwo.text.toString() + valueThree.text.toString() + "." + valueFour.text.toString() + valueFive.text.toString()
+                        Toast.makeText(context, "entered val:::$enteredVal", Toast.LENGTH_SHORT).show()
+                    }
+                    valueTwo.text.toString()!="0" -> {
+                        val enteredVal =
+                            valueThree.text.toString() + "." + valueFour.text.toString() + valueFive.text.toString()
+                        Toast.makeText(context, "entered val:::$enteredVal", Toast.LENGTH_SHORT).show()
+                    }
+                    valueFive.text.toString()!="0" -> {
+                        val enteredVal =
+                            valueOne.text.toString() + valueTwo.text.toString() + valueThree.text.toString() + "." + valueFour.text.toString()
+                        Toast.makeText(context, "entered val:::$enteredVal", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } else if (valueOne.text.isEmpty()){
+                valueOne.requestFocus()
+                Toast.makeText(context, "enter val 1", Toast.LENGTH_SHORT).show()
+            } else if (valueTwo.text.isEmpty()){
+                valueTwo.requestFocus()
+                Toast.makeText(context, "enter val 2", Toast.LENGTH_SHORT).show()
+            } else if (valueThree.text.isEmpty()){
+                valueThree.requestFocus()
+                Toast.makeText(context, "enter val 3", Toast.LENGTH_SHORT).show()
+            } else if (valueFour.text.isEmpty()){
+                valueFour.requestFocus()
+                Toast.makeText(context, "enter val 4", Toast.LENGTH_SHORT).show()
+            } else if (valueFive.text.isEmpty()){
+                valueFive.requestFocus()
+                Toast.makeText(context, "enter val 5", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -105,8 +133,6 @@ class MyBottomSheetDialogFragment : BottomSheetDialogFragment() {
                 R.id.valueFour -> if (text.length == 1) nextView!!.requestFocus()
             }
         }
-
-
     }
 
 }
