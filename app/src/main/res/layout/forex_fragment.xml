@@ -8,7 +8,6 @@
     android:background="@color/background">
 
     <ScrollView
-        android:id="@+id/forexContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollIndicators="none">

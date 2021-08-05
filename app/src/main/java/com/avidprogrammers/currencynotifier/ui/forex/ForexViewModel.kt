@@ -11,10 +11,6 @@ class ForexViewModel(
 ) : ViewModel() {
     val forex = forexRepository.getCurrentForexValue().asLiveData()
 
-    //    val forex by lazyDeferred {
-//        forexRepository.getCurrentValue()
-//        Log.d("[Forex123]","[ViewModel123] - "+forexRepository.getCurrentValue())
-//    }
     init {
         viewModelScope.launch {
             val value = null

@@ -5,14 +5,13 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
+import android.widget.EditText
+import android.widget.Toast
 import com.avidprogrammers.currencynotifier.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.forex_bottom_sheet.*
-import android.widget.EditText
-import android.widget.Toast
-import kotlinx.android.synthetic.main.forex_fragment.*
 
 
 class MyBottomSheetDialogFragment : BottomSheetDialogFragment() {

@@ -1,16 +1,10 @@
 package com.avidprogrammers.currencynotifier.ui.forex
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextUtils
-import android.text.TextWatcher
-import android.util.Log
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -71,8 +65,8 @@ class Forex : ScopedFragment(), KodeinAware {
         setForexTargetAdapterSpinner()
 
         setNotificationButton.setOnClickListener {
-            val modalbottomSheetFragment = MyBottomSheetDialogFragment()
-            modalbottomSheetFragment.show(parentFragmentManager, modalbottomSheetFragment.tag)
+            val modalBottomSheetFragment = MyBottomSheetDialogFragment()
+            modalBottomSheetFragment.show(parentFragmentManager, modalBottomSheetFragment.tag)
         }
 
     }

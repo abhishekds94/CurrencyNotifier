@@ -7,12 +7,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="BottomNavigationView" parent="Widget.Design.BottomNavigationView">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_gravity">bottom</item>
-        <item name="android:textSize">18sp</item>
-    </style>
-
     <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
         <item name="android:typeface">monospace</item>
         <item name="android:background">@drawable/bottomsheet_background</item>
