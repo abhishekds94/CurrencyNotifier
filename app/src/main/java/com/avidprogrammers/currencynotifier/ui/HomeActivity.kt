@@ -1,11 +1,17 @@
 package com.avidprogrammers.currencynotifier.ui
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.*
 import com.avidprogrammers.currencynotifier.R
+import com.avidprogrammers.currencynotifier.ui.notification.NotificationWorker
 import kotlinx.android.synthetic.main.activity_home.*
+import java.time.Duration
+import java.util.concurrent.TimeUnit
+import androidx.work.OneTimeWorkRequestBuilder as OneTimeWorkRequestBuilder
 
 class HomeActivity : AppCompatActivity() {
 
@@ -22,5 +28,19 @@ class HomeActivity : AppCompatActivity() {
 
         bottom_nav.itemIconTintList = null
 
+
+        Toast.makeText(this,"main", Toast.LENGTH_SHORT).show()
+        val periodicWorkRequest= PeriodicWorkRequestBuilder<NotificationWorker>(1,TimeUnit.HOURS).build()
+
+//        For Onetime notification testing
+//        val oneTimeWorkRequest= OneTimeWorkRequest.from(NotificationWorker::class.java)
+
+        WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork(
+            "forexnotification",
+            ExistingPeriodicWorkPolicy.KEEP,
+            periodicWorkRequest
+        )
+//        For Onetime notification testing
+//        WorkManager.getInstance(this).enqueueUniquePeriodicWork(oneTimeWorkRequest)
     }
 }

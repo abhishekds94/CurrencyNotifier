@@ -66,7 +66,7 @@ class Forex : ScopedFragment(), KodeinAware {
 
         setNotificationButton.setOnClickListener {
             val modalBottomSheetFragment = MyBottomSheetDialogFragment()
-            modalBottomSheetFragment.show(parentFragmentManager, modalBottomSheetFragment.tag)
+            modalBottomSheetFragment.show(childFragmentManager, modalBottomSheetFragment.tag)
         }
 
     }

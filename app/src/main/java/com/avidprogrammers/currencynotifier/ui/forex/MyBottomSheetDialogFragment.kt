@@ -7,14 +7,29 @@ import android.text.TextWatcher
 import android.view.*
 import android.widget.EditText
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import com.avidprogrammers.currencynotifier.R
+import com.avidprogrammers.currencynotifier.data.forex.ForexSharedPrefUtil
+import com.avidprogrammers.currencynotifier.data.network.response.ForexResponse
+import com.avidprogrammers.currencynotifier.ui.notification.NotificationWorker
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.forex_bottom_sheet.*
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
 
-class MyBottomSheetDialogFragment : BottomSheetDialogFragment() {
+class MyBottomSheetDialogFragment : BottomSheetDialogFragment(),KodeinAware {
+
+    override val kodein by closestKodein()
+    private val viewModelFactory: ForexViewModelFactory by instance()
+    private var enteredVal = ""
+
+    private lateinit var viewModel: ForexViewModel
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
@@ -22,6 +37,7 @@ class MyBottomSheetDialogFragment : BottomSheetDialogFragment() {
             dialog.behavior.skipCollapsed = true
             dialog.behavior.state = STATE_EXPANDED
         }
+
         return dialog
     }
 
@@ -32,6 +48,8 @@ class MyBottomSheetDialogFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        viewModel = ViewModelProvider(requireParentFragment(), viewModelFactory)
+            .get(ForexViewModel::class.java)
         return inflater.inflate(R.layout.forex_bottom_sheet, container, false)
 
     }
@@ -43,23 +61,38 @@ class MyBottomSheetDialogFragment : BottomSheetDialogFragment() {
         bt_setNotification.setOnClickListener {
 
             if (valueOne.text.isNotEmpty() && valueTwo.text.isNotEmpty() && valueThree.text.isNotEmpty() && valueFour.text.isNotEmpty() && valueFive.text.isNotEmpty()){
-                when {
-                    valueOne.text.toString()!="0" -> {
-                        val enteredVal =
-                            valueOne.text.toString() + valueTwo.text.toString() + valueThree.text.toString() + "." + valueFour.text.toString() + valueFive.text.toString()
-                        Toast.makeText(context, "entered val:::$enteredVal", Toast.LENGTH_SHORT).show()
+                enteredVal = when {
+
+                    valueOne.text.toString()=="0" && valueTwo.text.toString()=="0" -> {
+                        valueThree.text.toString() + "." + valueFour.text.toString() + valueFive.text.toString()
                     }
-                    valueTwo.text.toString()!="0" -> {
-                        val enteredVal =
-                            valueThree.text.toString() + "." + valueFour.text.toString() + valueFive.text.toString()
-                        Toast.makeText(context, "entered val:::$enteredVal", Toast.LENGTH_SHORT).show()
+
+                    valueOne.text.toString()=="0" -> {
+                        valueTwo.text.toString() + valueThree.text.toString() + "." + valueFour.text.toString() + valueFive.text.toString()
                     }
-                    valueFive.text.toString()!="0" -> {
-                        val enteredVal =
-                            valueOne.text.toString() + valueTwo.text.toString() + valueThree.text.toString() + "." + valueFour.text.toString()
-                        Toast.makeText(context, "entered val:::$enteredVal", Toast.LENGTH_SHORT).show()
+
+                    valueTwo.text.toString()=="0" -> {
+                        valueThree.text.toString() + "." + valueFour.text.toString() + valueFive.text.toString()
+                    }
+
+
+                    valueFive.text.toString()=="0" -> {
+                        valueOne.text.toString() + valueTwo.text.toString() + valueThree.text.toString() + "." + valueFour.text.toString()
+                    }
+
+                    else -> {
+                        valueOne.text.toString() + valueTwo.text.toString() + valueThree.text.toString() + "." + valueFour.text.toString() + valueFive.text.toString()
                     }
                 }
+                Toast.makeText(context, "entered val:::$enteredVal", Toast.LENGTH_SHORT).show()
+                val code = viewModel.forex.value?.currencyCode
+
+                code?.let {
+                    Toast.makeText(context, "code val:::$it", Toast.LENGTH_SHORT).show()
+                    val sharedPrefUtil=ForexSharedPrefUtil(requireContext())
+                    sharedPrefUtil.setForex("forex", ForexResponse(it,enteredVal))
+                }
+
             } else if (valueOne.text.isEmpty()){
                 valueOne.requestFocus()
                 Toast.makeText(context, "enter val 1", Toast.LENGTH_SHORT).show()
@@ -104,7 +137,6 @@ class MyBottomSheetDialogFragment : BottomSheetDialogFragment() {
     class GenericKeyEvent internal constructor(private val currentView: EditText, private val previousView: EditText?) : View.OnKeyListener{
         override fun onKey(p0: View?, keyCode: Int, event: KeyEvent?): Boolean {
             if(event!!.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL && currentView.id != R.id.valueOne && currentView.text.isEmpty()) {
-                //If current is empty then previous EditText's number will also be deleted
                 previousView!!.text = null
                 previousView.requestFocus()
                 return true
