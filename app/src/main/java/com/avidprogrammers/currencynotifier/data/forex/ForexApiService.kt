@@ -1,6 +1,7 @@
 package com.avidprogrammers.currencynotifier.data.forex
 
 import androidx.annotation.Keep
+import com.avidprogrammers.currencynotifier.BuildConfig
 import com.avidprogrammers.currencynotifier.data.network.ConnectivityInterceptor
 import com.avidprogrammers.currencynotifier.data.network.response.ForexResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -13,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-const val BASE_URL = "http://abhishekandroid.xyz:8080/data/"
+const val BASE_URL = BuildConfig.API_URL
 
 interface ForexApiService {
 

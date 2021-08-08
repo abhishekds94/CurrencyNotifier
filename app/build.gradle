@@ -4,18 +4,29 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: "kotlin-kapt"
 apply plugin: "androidx.navigation.safeargs"
 
+def apikeyPropertiesFile = rootProject.file("api.properties")
+def apikeyProperties = new Properties()
+apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.avidprogrammers.currencynotifier"
         minSdkVersion 26
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "ADMOB_APPOPEN", apikeyProperties['ADMOB_APPOPEN'])
+        buildConfigField("String", "ADMOB_INTERSTITIAL", apikeyProperties['ADMOB_INTERSTITIAL'])
+        buildConfigField("String", "ADMOB_NATIVE", apikeyProperties['ADMOB_NATIVE'])
+
+        buildConfigField("String", "API_URL", apikeyProperties['API_URL'])
+
     }
 
     buildTypes {
@@ -105,5 +116,9 @@ dependencies {
 
     //For Admob
     implementation "com.google.android.gms:play-services-ads:20.2.0"
+
+    //Timber for logs
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
 
 }
