@@ -30,10 +30,10 @@ class HomeActivity : AppCompatActivity() {
 
 
         Toast.makeText(this,"main", Toast.LENGTH_SHORT).show()
-        val periodicWorkRequest= PeriodicWorkRequestBuilder<NotificationWorker>(1,TimeUnit.HOURS).build()
+        val periodicWorkRequest= PeriodicWorkRequestBuilder<NotificationWorker>(30,TimeUnit.MINUTES).build()
 
 //        For Onetime notification testing
-//        val oneTimeWorkRequest= OneTimeWorkRequest.from(NotificationWorker::class.java)
+//        val oneTimeWorkRequest= OneTimeWorkRequest.Builder(NotificationWorker::class.java).build()
 
         WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork(
             "forexnotification",
@@ -41,6 +41,8 @@ class HomeActivity : AppCompatActivity() {
             periodicWorkRequest
         )
 //        For Onetime notification testing
-//        WorkManager.getInstance(this).enqueueUniquePeriodicWork(oneTimeWorkRequest)
+//        val workManager = WorkManager.getInstance(this)
+//        workManager.enqueue(oneTimeWorkRequest)
+
     }
 }
