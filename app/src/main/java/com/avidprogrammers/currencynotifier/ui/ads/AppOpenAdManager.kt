@@ -8,6 +8,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
+import com.avidprogrammers.currencynotifier.data.forex.ForexValue
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
@@ -17,9 +18,9 @@ import com.google.android.gms.ads.appopen.AppOpenAd.AppOpenAdLoadCallback
 import java.util.*
 
 
-class AppOpenManager(myApplication: MyApplication) : LifecycleObserver,
+class AppOpenManager(myApplication: ForexValue) : LifecycleObserver,
     ActivityLifecycleCallbacks {
-    private val myApplication: MyApplication = myApplication
+    private val myApplication: ForexValue = myApplication
     private var appOpenAd: AppOpenAd? = null
     private var loadCallback: AppOpenAdLoadCallback? = null
     private var currentActivity: Activity? = null

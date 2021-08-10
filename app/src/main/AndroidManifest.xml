@@ -9,21 +9,32 @@
     <application
         android:name=".data.forex.ForexValue"
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        android:fullBackupContent="true"
         tools:ignore="MissingClass">
+
+        <activity
+            android:name=".ui.notification.NotificationActivity"
+            android:exported="true">
+
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+            android:value="ui.HomeActivity" />
+
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-4189677300594650~4217704463"/>
+            android:value="ca-app-pub-4189677300594650~4217704463" />
 
-        <activity android:name=".ui.MainActivity"
+        <activity
+            android:name=".ui.MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,12 +42,18 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.HomeActivity" />
+        <activity android:name=".ui.HomeActivity"
+            android:parentActivityName=".ui.HomeActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ui.HomeActivity" />
+
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
     </application>
 
 </manifest>

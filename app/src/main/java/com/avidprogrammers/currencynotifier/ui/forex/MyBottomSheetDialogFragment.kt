@@ -8,12 +8,10 @@ import android.view.*
 import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
 import com.avidprogrammers.currencynotifier.R
-import com.avidprogrammers.currencynotifier.data.forex.ForexSharedPrefUtil
-import com.avidprogrammers.currencynotifier.data.network.response.ForexResponse
-import com.avidprogrammers.currencynotifier.ui.notification.NotificationWorker
+import com.avidprogrammers.currencynotifier.ui.notification.Forex
+import com.avidprogrammers.currencynotifier.ui.notification.ForexNotificationViewModelFactory
+import com.avidprogrammers.currencynotifier.ui.notification.ForexNotificationViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -21,6 +19,10 @@ import kotlinx.android.synthetic.main.forex_bottom_sheet.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 class MyBottomSheetDialogFragment : BottomSheetDialogFragment(),KodeinAware {
@@ -29,7 +31,9 @@ class MyBottomSheetDialogFragment : BottomSheetDialogFragment(),KodeinAware {
     private val viewModelFactory: ForexViewModelFactory by instance()
     private var enteredVal = ""
 
+    private val notifViewModelFactory:ForexNotificationViewModelFactory by instance()
     private lateinit var viewModel: ForexViewModel
+    private lateinit var notificationViewModel:ForexNotificationViewModel
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
@@ -50,13 +54,41 @@ class MyBottomSheetDialogFragment : BottomSheetDialogFragment(),KodeinAware {
         dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         viewModel = ViewModelProvider(requireParentFragment(), viewModelFactory)
             .get(ForexViewModel::class.java)
+        notificationViewModel=ViewModelProvider(requireParentFragment(),notifViewModelFactory).get(ForexNotificationViewModel::class.java)
         return inflater.inflate(R.layout.forex_bottom_sheet, container, false)
+
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         textInput()
+        notificationViewModel.inProgress.observe(viewLifecycleOwner){
+            it?.let {
+                if(it){
+                    bt_setNotification.visibility=View.GONE
+                    progress_not.visibility=View.VISIBLE
+
+                    //For testing one time notification
+                   /* val periodicWorkRequest= PeriodicWorkRequestBuilder<NotificationWorker>(15,
+                        TimeUnit.MINUTES).build()
+
+                    WorkManager.getInstance(requireContext()).enqueueUniquePeriodicWork(
+                        "forexxnotification",
+                        ExistingPeriodicWorkPolicy.KEEP,
+                        periodicWorkRequest
+                    )*/
+
+                }else{
+                    bt_setNotification.visibility=View.VISIBLE
+                    progress_not.visibility=View.GONE
+                }
+            }
+        }
 
         bt_setNotification.setOnClickListener {
 
@@ -85,12 +117,26 @@ class MyBottomSheetDialogFragment : BottomSheetDialogFragment(),KodeinAware {
                     }
                 }
                 Toast.makeText(context, "entered val:::$enteredVal", Toast.LENGTH_SHORT).show()
-                val code = viewModel.forex.value?.currencyCode
+                val f= viewModel.forex.value
 
-                code?.let {
-                    Toast.makeText(context, "code val:::$it", Toast.LENGTH_SHORT).show()
-                    val sharedPrefUtil=ForexSharedPrefUtil(requireContext())
-                    sharedPrefUtil.setForex("forex", ForexResponse(it,enteredVal))
+                f?.let {
+
+                    //For Date
+                    val localDate: LocalDate = LocalDate.now()
+                    val formatter: DateTimeFormatter =
+                        DateTimeFormatter.ofPattern("dd LLLL yyyy")
+                    val formattedString: String = localDate.format(formatter)
+
+                    //For Time
+                    val currentTime = System.currentTimeMillis()
+                    val simpleDateFormat = SimpleDateFormat("hh:mm:ss")
+                    val date = Date(currentTime)
+                    val time: String = simpleDateFormat.format(date)
+
+                    notificationViewModel.insertForex(Forex(null,it.currencyCode,it.currencyVal,enteredVal,"In Progress",
+                        "$formattedString $time",System.currentTimeMillis()))
+
+                    dismiss()
                 }
 
             } else if (valueOne.text.isEmpty()){

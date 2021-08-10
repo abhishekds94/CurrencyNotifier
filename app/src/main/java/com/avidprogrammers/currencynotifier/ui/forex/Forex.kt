@@ -1,5 +1,6 @@
 package com.avidprogrammers.currencynotifier.ui.forex
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.avidprogrammers.currencynotifier.BuildConfig
 import com.avidprogrammers.currencynotifier.R
 import com.avidprogrammers.currencynotifier.ui.base.ScopedFragment
+import com.avidprogrammers.currencynotifier.ui.notification.NotificationActivity
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
@@ -69,6 +71,11 @@ class Forex : ScopedFragment(), KodeinAware {
         if (!mAdIsLoading && mInterstitialAd == null) {
             mAdIsLoading = true
             loadAd()
+        }
+
+        iv_notificationStatus.setOnClickListener{
+            val intent= Intent(requireContext(),NotificationActivity::class.java)
+            requireContext().startActivity(intent)
         }
 
         btn_checkValue.setOnClickListener {
@@ -299,29 +306,6 @@ class Forex : ScopedFragment(), KodeinAware {
             (adView.callToActionView as Button).text = nativeAd.callToAction
         }
 
-//        if (nativeAd.icon == null) {
-//            adView.iconView.visibility = View.GONE
-//        } else {
-//            (adView.iconView as ImageView).setImageDrawable(
-//                nativeAd.icon.drawable
-//            )
-//            adView.iconView.visibility = View.VISIBLE
-//        }
-
-//        if (nativeAd.price == null) {
-//            adView.priceView.visibility = View.INVISIBLE
-//        } else {
-//            adView.priceView.visibility = View.VISIBLE
-//            (adView.priceView as TextView).text = nativeAd.price
-//        }
-
-//        if (nativeAd.store == null) {
-//            adView.storeView.visibility = View.INVISIBLE
-//        } else {
-//            adView.storeView.visibility = View.VISIBLE
-//            (adView.storeView as TextView).text = nativeAd.store
-//        }
-
         if (nativeAd.starRating == null) {
             adView.starRatingView.visibility = View.INVISIBLE
         } else {
@@ -336,23 +320,13 @@ class Forex : ScopedFragment(), KodeinAware {
             adView.advertiserView.visibility = View.VISIBLE
         }
 
-        // This method tells the Google Mobile Ads SDK that you have finished populating your
-        // native ad view with this native ad.
         adView.setNativeAd(nativeAd)
 
-        // Get the video controller for the ad. One will always be provided, even if the ad doesn't
-        // have a video asset.
         val vc = nativeAd.mediaContent.videoController
 
-        // Updates the UI to say whether or not this ad has a video asset.
         if (vc.hasVideoContent()) {
-            // Create a new VideoLifecycleCallbacks object and pass it to the VideoController. The
-            // VideoController will call methods on this object when events occur in the video
-            // lifecycle.
             vc.videoLifecycleCallbacks = object : VideoController.VideoLifecycleCallbacks() {
                 override fun onVideoEnd() {
-                    // Publishers should allow native ads to complete video playback before
-                    // refreshing or replacing them with another ad in the same UI location.
                     super.onVideoEnd()
                 }
             }
@@ -361,19 +335,11 @@ class Forex : ScopedFragment(), KodeinAware {
         }
     }
 
-    /**
-     * Creates a request for a new native ad based on the boolean parameters and calls the
-     * corresponding "populate" method when one is successfully returned.
-     *
-     */
     private fun refreshAd() {
 
         val builder = AdLoader.Builder(context, ADMOB_AD_UNIT_ID)
 
         builder.forNativeAd { nativeAd ->
-            // OnUnifiedNativeAdLoadedListener implementation.
-            // If this callback occurs after the activity is destroyed, you must call
-            // destroy and return or you may get a memory leak.
             var activityDestroyed = false
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
 
@@ -382,8 +348,6 @@ class Forex : ScopedFragment(), KodeinAware {
                 nativeAd.destroy()
                 return@forNativeAd
             }
-            // You must call destroy on old ads when you are done with them,
-            // otherwise you will have a memory leak.
             currentNativeAd?.destroy()
             currentNativeAd = nativeAd
             val adView = layoutInflater

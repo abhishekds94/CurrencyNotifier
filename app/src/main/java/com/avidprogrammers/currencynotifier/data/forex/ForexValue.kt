@@ -8,7 +8,11 @@ import com.avidprogrammers.currencynotifier.data.network.ConnectivityInterceptor
 import com.avidprogrammers.currencynotifier.data.network.ForexNetworkDataSource
 import com.avidprogrammers.currencynotifier.data.network.ForexNetworkDataSourceImpl
 import com.avidprogrammers.currencynotifier.db.ForexDatabase
+import com.avidprogrammers.currencynotifier.ui.ads.AppOpenManager
 import com.avidprogrammers.currencynotifier.ui.forex.ForexViewModelFactory
+import com.avidprogrammers.currencynotifier.ui.notification.ForexNotificationRepository
+import com.avidprogrammers.currencynotifier.ui.notification.ForexNotificationViewModelFactory
+import com.google.android.gms.ads.MobileAds
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -33,11 +37,18 @@ class ForexValue : Application(), KodeinAware {
                 this.instance()
             )
         }
+        this.bind<ForexNotificationRepository>() with this.singleton {
+            ForexNotificationRepository(this.instance())
+        }
         bind() from this.provider { ForexViewModelFactory(this.instance()) }
+        bind() from this.provider { ForexNotificationViewModelFactory(this.instance()) }
     }
 
     override fun onCreate() {
         super.onCreate()
         AndroidThreeTen.init(this)
+        MobileAds.initialize(
+            this
+        ) { AppOpenManager(this) }
     }
 }

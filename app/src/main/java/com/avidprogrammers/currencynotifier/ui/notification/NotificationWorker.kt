@@ -2,13 +2,14 @@ package com.avidprogrammers.currencynotifier.ui.notification
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.TaskStackBuilder
 import android.content.Context
+import android.content.Intent
 import android.os.Handler
-import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.work.CoroutineWorker
-import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.avidprogrammers.currencynotifier.R
 import com.avidprogrammers.currencynotifier.data.forex.ForexApiService
@@ -17,26 +18,27 @@ import com.avidprogrammers.currencynotifier.data.network.ConnectivityInterceptor
 import com.avidprogrammers.currencynotifier.data.network.response.ForexResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
-import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import android.os.Looper
-import retrofit2.Response
+import com.avidprogrammers.currencynotifier.ui.MainActivity
 import java.lang.Exception
 
 
 class NotificationWorker(val appContext: Context,workerParameters: WorkerParameters):
-    Worker(appContext,workerParameters) {
+    CoroutineWorker(appContext,workerParameters),KodeinAware {
 
+    override val kodein by closestKodein{appContext}
     private val forexShared=ForexSharedPrefUtil(appContext)
     private val forexApiService:ForexApiService = ForexApiService(ConnectivityInterceptorImpl(appContext))
     private val responses:MutableList<ForexResponse>? =forexShared.getForex("forex")
+    private val repository:ForexNotificationRepository by instance()
 
-    private  fun checkTheValue(id:Int,forexResponse: ForexResponse){
+    private suspend fun checkTheValue(id:Int,forexResponse: Forex){
+      withContext(Dispatchers.IO){
       val fetchedCurrentValue = forexApiService
-          .getCurrentValueSync(forexResponse.currencyCode)
+          .getCurrentValueSync(forexResponse.currencyCode!!)
 
       val handler = Handler(Looper.getMainLooper())
 
@@ -48,19 +50,23 @@ class NotificationWorker(val appContext: Context,workerParameters: WorkerParamet
           val response=fetchedCurrentValue.execute()
           val forexValue=response.body()
           val handler = Handler(Looper.getMainLooper())
-          handler.postDelayed({
-              Toast.makeText(appContext, forexValue?.currencyVal, Toast.LENGTH_SHORT).show()
-          }, 1000)
+
 
           val v = String.format("%.2f",forexValue?.currencyVal?.toFloat())
+          handler.postDelayed({
+              Toast.makeText(appContext, v, Toast.LENGTH_SHORT).show()
+          }, 1000)
 
-          if(forexResponse.currencyVal.toFloat() >= v.toFloat()){
+
+          if(forexResponse.targetVal!!.toFloat() >= v.toFloat()){
               showNotification(id,forexValue?.currencyCode+forexValue?.currencyVal)
-              responses?.remove(forexResponse)
+              forexResponse.notificationStatus="Completed"
+              repository.updateNotification(forexResponse)
+             // responses?.remove(forexResponse)
           }
       } catch (e:Exception){
           e.printStackTrace()
-      }
+      }}
     }
 
     private fun showNotification(id:Int,message:String){
@@ -70,6 +76,15 @@ class NotificationWorker(val appContext: Context,workerParameters: WorkerParamet
             .setContentTitle("My notification")
             .setContentText(message)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        val resultIntent = Intent(appContext, MainActivity::class.java)
+// Create the TaskStackBuilder
+        val resultPendingIntent: PendingIntent? = TaskStackBuilder.create(appContext).run {
+            // Add the intent, which inflates the back stack
+            addNextIntentWithParentStack(resultIntent)
+            // Get the PendingIntent containing the entire back stack
+            getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+        }
+        builder.setContentIntent(resultPendingIntent)
         val channel = NotificationChannel(channelId, "Currency Channel", NotificationManager.IMPORTANCE_DEFAULT )
 
         val notificationManager: NotificationManager =
@@ -78,18 +93,25 @@ class NotificationWorker(val appContext: Context,workerParameters: WorkerParamet
         notificationManager.notify(id, builder.build())
     }
 
-    override fun doWork(): Result {
+    override suspend fun doWork(): Result {
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed({
             Toast.makeText(appContext, "Working", Toast.LENGTH_SHORT).show()
         }, 1000)
+        return withContext(Dispatchers.IO){
 
-        responses?.let {
-            it.forEachIndexed { index, forexResponse ->
-                checkTheValue(index,forexResponse)
+            val notification=repository.getInProgressNotification("In Progress")
+            notification?.let {
+                checkTheValue(0, it)
             }
-            forexShared.setForexValues("forex", responses)
+         /* responses?.let {
+                it.forEachIndexed { index, forexResponse ->
+                    checkTheValue(index,forexResponse)
+                }
+                forexShared.setForexValues("forex", responses)
+            }*/
+             Result.success()
         }
-        return Result.success()
+
     }
 }
