@@ -30,7 +30,7 @@ class HomeActivity : AppCompatActivity() {
 
 
         Toast.makeText(this,"main", Toast.LENGTH_SHORT).show()
-        val periodicWorkRequest= PeriodicWorkRequestBuilder<NotificationWorker>(15,TimeUnit.MINUTES).build()
+        val periodicWorkRequest= PeriodicWorkRequestBuilder<NotificationWorker>(60,TimeUnit.MINUTES).build()
 
 //        For Onetime notification testing
 //        val oneTimeWorkRequest= OneTimeWorkRequest.Builder(NotificationWorker::class.java).build()
