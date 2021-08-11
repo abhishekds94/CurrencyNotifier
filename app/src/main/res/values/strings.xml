@@ -3,7 +3,7 @@
     <string name="avid">© Avid Programmers</string>
     <string name="appNameSplash">Currency Notifier</string>
     <string name="forexValText">The exchange value for 1 %1$s to 1 %2$s is,</string>
-    <string name="forex_header">Exchange Rates Notifier</string>
+    <string name="forex_header">Forex Notifier</string>
     <string name="check_value_btn">Check Value</string>
     <string name="set_notification_btn">set Notification</string>
 </resources>

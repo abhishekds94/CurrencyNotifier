@@ -31,16 +31,24 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toRightOf="parent" />
 
-            <ImageView
-                android:id="@+id/iv_notificationStatus"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/bell"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:padding="4dp"
+            <FrameLayout
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:background="@drawable/notification_bg"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/forexHeading"/>
+                app:layout_constraintRight_toLeftOf="@+id/forexHeading">
+
+                <ImageView
+                    android:id="@+id/iv_notificationStatus"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/bell"
+                    android:padding="4dp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="7dp"
+                    android:layout_marginTop="8dp"/>
+
+            </FrameLayout>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvCurrencySelector"
