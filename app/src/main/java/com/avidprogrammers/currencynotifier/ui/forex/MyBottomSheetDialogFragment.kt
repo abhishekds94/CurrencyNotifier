@@ -116,7 +116,7 @@ class MyBottomSheetDialogFragment : BottomSheetDialogFragment(),KodeinAware {
                         valueOne.text.toString() + valueTwo.text.toString() + valueThree.text.toString() + "." + valueFour.text.toString() + valueFive.text.toString()
                     }
                 }
-                Toast.makeText(context, "entered val:::$enteredVal", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, "entered val:::$enteredVal", Toast.LENGTH_SHORT).show()
                 val f= viewModel.forex.value
 
                 f?.let {

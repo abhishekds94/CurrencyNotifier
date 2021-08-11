@@ -28,8 +28,6 @@ class HomeActivity : AppCompatActivity() {
 
         bottom_nav.itemIconTintList = null
 
-
-        Toast.makeText(this,"main", Toast.LENGTH_SHORT).show()
         val periodicWorkRequest= PeriodicWorkRequestBuilder<NotificationWorker>(60,TimeUnit.MINUTES).build()
 
 //        For Onetime notification testing

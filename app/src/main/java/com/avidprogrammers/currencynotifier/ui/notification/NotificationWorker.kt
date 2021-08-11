@@ -42,9 +42,9 @@ class NotificationWorker(val appContext: Context,workerParameters: WorkerParamet
 
       val handler = Handler(Looper.getMainLooper())
 
-      handler.postDelayed({
+      /*handler.postDelayed({
           Toast.makeText(appContext, forexResponse.currencyVal, Toast.LENGTH_SHORT).show()
-      }, 1000)
+      }, 1000)*/
 
       try {
           val response=fetchedCurrentValue.execute()
@@ -53,9 +53,9 @@ class NotificationWorker(val appContext: Context,workerParameters: WorkerParamet
 
 
           val v = String.format("%.2f",forexValue?.currencyVal?.toFloat())
-          handler.postDelayed({
+/*          handler.postDelayed({
               Toast.makeText(appContext, v, Toast.LENGTH_SHORT).show()
-          }, 1000)
+          }, 1000)*/
 
 
           if(forexResponse.targetVal!!.toFloat() >= v.toFloat()){
@@ -95,9 +95,9 @@ class NotificationWorker(val appContext: Context,workerParameters: WorkerParamet
 
     override suspend fun doWork(): Result {
         val handler = Handler(Looper.getMainLooper())
-        handler.postDelayed({
+/*        handler.postDelayed({
             Toast.makeText(appContext, "Working", Toast.LENGTH_SHORT).show()
-        }, 1000)
+        }, 1000)*/
         return withContext(Dispatchers.IO){
 
             val notification=repository.getInProgressNotification("In Progress")

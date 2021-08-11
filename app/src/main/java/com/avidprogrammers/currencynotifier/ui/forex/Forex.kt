@@ -8,10 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import android.widget.Toast.LENGTH_LONG
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.avidprogrammers.currencynotifier.BuildConfig
 import com.avidprogrammers.currencynotifier.R
+import com.avidprogrammers.currencynotifier.ui.SnackbarUtil
+import com.avidprogrammers.currencynotifier.ui.SnackbarUtil.showSnakbarTypeOne
 import com.avidprogrammers.currencynotifier.ui.base.ScopedFragment
 import com.avidprogrammers.currencynotifier.ui.notification.NotificationActivity
 import com.google.android.gms.ads.*
@@ -21,6 +24,8 @@ import com.google.android.gms.ads.nativead.MediaView
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdOptions
 import com.google.android.gms.ads.nativead.NativeAdView
+import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG
+import com.google.android.material.snackbar.Snackbar.make
 import kotlinx.android.synthetic.main.forex_bottom_sheet.*
 import kotlinx.android.synthetic.main.forex_fragment.*
 import kotlinx.coroutines.launch
@@ -88,7 +93,8 @@ class Forex : ScopedFragment(), KodeinAware {
                     ).show()
                 }
                 sourceSelected == "Select Source" -> {
-                    Toast.makeText(context, "Select the Source Currency", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(context, "Select the Source Currency", Toast.LENGTH_LONG).show()
+                    SnackbarUtil.showSnack(requireActivity(), "Source and Target Currencies cannot be same");
                 }
                 targetSelected == "Select Target" -> {
                     Toast.makeText(context, "Select the Target Currency", Toast.LENGTH_LONG).show()
@@ -125,7 +131,7 @@ class Forex : ScopedFragment(), KodeinAware {
             }
         })
         comboSelected = sourceSelected + targetSelected
-        Toast.makeText(context, "Combo-$comboSelected", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(context, "Combo-$comboSelected", Toast.LENGTH_SHORT).show()
         viewModel.selectedCurrencyPair(comboSelected)
 
         forexValText.text = getString(R.string.forexValText, sourceSelected, targetSelected)
@@ -225,18 +231,18 @@ class Forex : ScopedFragment(), KodeinAware {
                     mAdIsLoading = false
                     val error = "domain: ${adError.domain}, code: ${adError.code}, " +
                             "message: ${adError.message}"
-                    Toast.makeText(
+/*                    Toast.makeText(
                         context,
                         "onAdFailedToLoad() with error $error",
                         Toast.LENGTH_SHORT
-                    ).show()
+                    ).show()*/
                 }
 
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
                     Log.d("TAG", "Ad was loaded.")
                     mInterstitialAd = interstitialAd
                     mAdIsLoading = false
-                    Toast.makeText(context, "onAdLoaded()", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(context, "onAdLoaded()", Toast.LENGTH_SHORT).show()
                 }
             }
         )
@@ -268,7 +274,7 @@ class Forex : ScopedFragment(), KodeinAware {
             }
             mInterstitialAd?.show(requireActivity())
         } else {
-            Toast.makeText(context, "Ad wasn't loaded.", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(context, "Ad wasn't loaded.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -372,10 +378,10 @@ class Forex : ScopedFragment(), KodeinAware {
                     """
            domain: ${loadAdError.domain}, code: ${loadAdError.code}, message: ${loadAdError.message}
           """"
-                Toast.makeText(
+                /*Toast.makeText(
                     context, "Failed to load native ad with error $error",
                     Toast.LENGTH_SHORT
-                ).show()
+                ).show()*/
             }
         }).build()
 
