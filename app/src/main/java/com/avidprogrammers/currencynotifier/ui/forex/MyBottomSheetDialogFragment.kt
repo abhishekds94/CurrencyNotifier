@@ -6,9 +6,9 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
 import android.widget.EditText
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.avidprogrammers.currencynotifier.R
+import com.avidprogrammers.currencynotifier.ui.SnackbarUtil
 import com.avidprogrammers.currencynotifier.ui.notification.Forex
 import com.avidprogrammers.currencynotifier.ui.notification.ForexNotificationViewModelFactory
 import com.avidprogrammers.currencynotifier.ui.notification.ForexNotificationViewModel
@@ -116,7 +116,6 @@ class MyBottomSheetDialogFragment : BottomSheetDialogFragment(),KodeinAware {
                         valueOne.text.toString() + valueTwo.text.toString() + valueThree.text.toString() + "." + valueFour.text.toString() + valueFive.text.toString()
                     }
                 }
-//                Toast.makeText(context, "entered val:::$enteredVal", Toast.LENGTH_SHORT).show()
                 val f= viewModel.forex.value
 
                 f?.let {
@@ -137,23 +136,26 @@ class MyBottomSheetDialogFragment : BottomSheetDialogFragment(),KodeinAware {
                         "$formattedString $time",System.currentTimeMillis()))
 
                     dismiss()
+                    SnackbarUtil.showActionSnack(requireActivity(),
+                        "Alert created with a value: $enteredVal"
+                    )
                 }
 
             } else if (valueOne.text.isEmpty()){
                 valueOne.requestFocus()
-                Toast.makeText(context, "enter val 1", Toast.LENGTH_SHORT).show()
+                SnackbarUtil.showErrorSnackBottomSheet(view, "Enter value in first blank!")
             } else if (valueTwo.text.isEmpty()){
                 valueTwo.requestFocus()
-                Toast.makeText(context, "enter val 2", Toast.LENGTH_SHORT).show()
+                SnackbarUtil.showErrorSnackBottomSheet(view, "Enter value in second blank!")
             } else if (valueThree.text.isEmpty()){
                 valueThree.requestFocus()
-                Toast.makeText(context, "enter val 3", Toast.LENGTH_SHORT).show()
+                SnackbarUtil.showErrorSnackBottomSheet(view, "Enter value in third blank!")
             } else if (valueFour.text.isEmpty()){
                 valueFour.requestFocus()
-                Toast.makeText(context, "enter val 4", Toast.LENGTH_SHORT).show()
+                SnackbarUtil.showErrorSnackBottomSheet(view, "Enter value in fourth blank!")
             } else if (valueFive.text.isEmpty()){
                 valueFive.requestFocus()
-                Toast.makeText(context, "enter val 5", Toast.LENGTH_SHORT).show()
+                SnackbarUtil.showErrorSnackBottomSheet(view, "Enter value in fifth blank!")
             }
         }
 

@@ -63,7 +63,7 @@
                 android:id="@+id/notification_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 tools:text="8/9/2021"
                 android:fontFamily="@font/open_sans"

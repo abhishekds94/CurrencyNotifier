@@ -13,7 +13,7 @@
 
     <item
         android:id="@+id/stocksFragment"
-        android:icon="@drawable/ic_stocks"
-        android:title="Stocks"/>
+        android:icon="@drawable/ic_news"
+        android:title="News"/>
 
 </menu>

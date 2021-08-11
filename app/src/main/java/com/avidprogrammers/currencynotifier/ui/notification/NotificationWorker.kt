@@ -40,12 +40,6 @@ class NotificationWorker(val appContext: Context,workerParameters: WorkerParamet
       val fetchedCurrentValue = forexApiService
           .getCurrentValueSync(forexResponse.currencyCode!!)
 
-      val handler = Handler(Looper.getMainLooper())
-
-      /*handler.postDelayed({
-          Toast.makeText(appContext, forexResponse.currencyVal, Toast.LENGTH_SHORT).show()
-      }, 1000)*/
-
       try {
           val response=fetchedCurrentValue.execute()
           val forexValue=response.body()
@@ -53,10 +47,6 @@ class NotificationWorker(val appContext: Context,workerParameters: WorkerParamet
 
 
           val v = String.format("%.2f",forexValue?.currencyVal?.toFloat())
-/*          handler.postDelayed({
-              Toast.makeText(appContext, v, Toast.LENGTH_SHORT).show()
-          }, 1000)*/
-
 
           if(forexResponse.targetVal!!.toFloat() >= v.toFloat()){
               showNotification(id,forexValue?.currencyCode+forexValue?.currencyVal)
