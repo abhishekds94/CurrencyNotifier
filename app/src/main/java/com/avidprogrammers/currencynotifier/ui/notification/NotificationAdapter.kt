@@ -12,7 +12,7 @@ import com.avidprogrammers.currencynotifier.R
 import kotlinx.android.synthetic.main.forex_fragment.*
 import org.w3c.dom.Text
 
-class NotificationAdapter() : ListAdapter<Forex, NotificationAdapter.NotificationViewHolder>(DIFFUTIL){
+class NotificationAdapter : ListAdapter<Forex, NotificationAdapter.NotificationViewHolder>(DIFFUTIL){
 
     inner class NotificationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val currenyCode=itemView.findViewById<TextView>(R.id.cur_code)
@@ -36,7 +36,7 @@ class NotificationAdapter() : ListAdapter<Forex, NotificationAdapter.Notificatio
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
-        val view= LayoutInflater.from(parent.context).inflate(R.layout.notification_item,parent,false);
+        val view= LayoutInflater.from(parent.context).inflate(R.layout.notification_item,parent,false)
         return NotificationViewHolder(view)
     }
 

@@ -8,4 +8,7 @@
     <string name="news_header">Finance News</string>
     <string name="check_value_btn">Check Value</string>
     <string name="set_notification_btn">set Notification</string>
+    <string name="privacy_policy"><u>Privacy Policy</u></string>
+    <string name="dash">|</string>
+    <string name="terms_and_conditions"><u><![CDATA[Terms & Conditions]]></u></string>
 </resources>

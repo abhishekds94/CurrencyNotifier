@@ -41,7 +41,7 @@ abstract class ForexDatabase : RoomDatabase() {
         val MIGRATION_2_3=object:Migration(2,3){
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE forex_notification "
-                        + " ADD COLUMN notificationCreatedAt INTEGER DEFAULT 0");
+                        + " ADD COLUMN notificationCreatedAt INTEGER DEFAULT 0")
             }
         }
 

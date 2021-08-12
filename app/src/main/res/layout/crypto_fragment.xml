@@ -7,7 +7,6 @@
     tools:context=".ui.crypto.Crypto">
 
     <TextView
-        android:id="@+id/cryptoHeading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/open_sans_semibold"
@@ -18,7 +17,6 @@
         android:textColor="@color/black"/>
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lav_actionBar"
         android:layout_width="match_parent"
         android:layout_height="270dp"
         android:scaleType="fitXY"

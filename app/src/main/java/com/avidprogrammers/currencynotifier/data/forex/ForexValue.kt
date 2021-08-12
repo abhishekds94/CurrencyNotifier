@@ -47,8 +47,5 @@ class ForexValue : Application(), KodeinAware {
     override fun onCreate() {
         super.onCreate()
         AndroidThreeTen.init(this)
-        MobileAds.initialize(
-            this
-        ) { AppOpenManager(this) }
     }
 }

@@ -51,7 +51,7 @@ class AppOpenManager(myApplication: ForexValue) : LifecycleObserver,
         }
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onStart() {
         showAdIfAvailable()
         Log.d(LOG_TAG, "onStart")
