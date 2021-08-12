@@ -72,6 +72,8 @@ class AppOpenManager(myApplication: ForexValue) : LifecycleObserver,
 
             override fun onAdFailedToLoad(loadAdError: LoadAdError) {
                 super.onAdFailedToLoad(loadAdError)
+                Log.d("admobAd123","ad failed" +loadAdError?.message)
+                Log.d("admobAd123","appOpen ad failed" +loadAdError)
                 fetchAd()
             }
         }

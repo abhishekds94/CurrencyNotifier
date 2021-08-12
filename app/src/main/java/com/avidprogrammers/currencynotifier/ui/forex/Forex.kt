@@ -215,7 +215,8 @@ class Forex : ScopedFragment(), KodeinAware {
             context, AD_UNIT_ID, adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
-                    Log.d("TAG", adError?.message)
+                    Log.d("admobAd123","ad failed" +adError?.message)
+                    Log.d("admobAd123","inter ad failed" +adError)
                     mInterstitialAd = null
                     mAdIsLoading = false
                     val error = "domain: ${adError.domain}, code: ${adError.code}, " +
@@ -353,6 +354,8 @@ class Forex : ScopedFragment(), KodeinAware {
 
         val adLoader = builder.withAdListener(object : AdListener() {
             override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                Log.d("admobAd123","ad failed" +loadAdError?.message)
+                Log.d("admobAd123"," native ad failed" +loadAdError)
                 val error =
                     """
            domain: ${loadAdError.domain}, code: ${loadAdError.code}, message: ${loadAdError.message}

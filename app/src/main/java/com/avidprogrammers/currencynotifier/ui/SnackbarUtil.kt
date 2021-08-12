@@ -13,9 +13,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_home.*
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
+import androidx.fragment.app.FragmentContainerView
 import com.avidprogrammers.currencynotifier.ui.notification.NotificationActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.activity_home.bottom_nav
+import kotlinx.android.synthetic.main.activity_home.view.*
 import kotlinx.android.synthetic.main.forex_bottom_sheet.*
 import kotlinx.coroutines.withContext
 
@@ -58,7 +60,7 @@ object SnackbarUtil {
     }
 
     fun showErrorSnack(activity: Activity, text: String?) {
-        val bottomNavView: ConstraintLayout = activity.bottomSheetForex!!
+        val bottomNavView: BottomNavigationView = activity.bottom_nav!!
         val sb = Snackbar.make(bottomNavView, text!!, Snackbar.LENGTH_LONG)
             .apply { anchorView = bottomNavView }
         sb.view.setBackgroundColor(Color.parseColor("#ba000d"))
