@@ -98,11 +98,6 @@ class MyBottomSheetDialogFragment : BottomSheetDialogFragment(),KodeinAware {
                         valueTwo.text.toString() + valueThree.text.toString() + "." + valueFour.text.toString() + valueFive.text.toString()
                     }
 
-                    valueTwo.text.toString()=="0" -> {
-                        valueThree.text.toString() + "." + valueFour.text.toString() + valueFive.text.toString()
-                    }
-
-
                     valueFive.text.toString()=="0" -> {
                         valueOne.text.toString() + valueTwo.text.toString() + valueThree.text.toString() + "." + valueFour.text.toString()
                     }

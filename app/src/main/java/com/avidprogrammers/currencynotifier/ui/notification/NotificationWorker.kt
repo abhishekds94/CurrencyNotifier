@@ -22,6 +22,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
 import android.os.Looper
+import android.util.Log
 import com.avidprogrammers.currencynotifier.ui.MainActivity
 import java.lang.Exception
 
@@ -49,7 +50,7 @@ class NotificationWorker(val appContext: Context,workerParameters: WorkerParamet
           val v = String.format("%.2f",forexValue?.currencyVal?.toFloat())
 
           if(forexResponse.targetVal!!.toFloat() >= v.toFloat()){
-              showNotification(id,forexValue?.currencyCode+forexValue?.currencyVal)
+              showNotification(id,"Forex pair " + forexValue?.currencyCode + " value is now " +v)
               forexResponse.notificationStatus="Completed"
               repository.updateNotification(forexResponse)
              // responses?.remove(forexResponse)
@@ -59,21 +60,20 @@ class NotificationWorker(val appContext: Context,workerParameters: WorkerParamet
       }}
     }
 
-    private fun showNotification(id:Int,message:String){
+    private fun showNotification(id:Int, message:String){
         val channelId = "COM.AVIDPROGRAMMERS.CHANNEL"
         val builder = NotificationCompat.Builder(appContext, channelId)
-            .setSmallIcon(R.drawable.ic_forex)
-            .setContentTitle("My notification")
+            .setSmallIcon(R.drawable.bell)
+            .setContentTitle("Selected Forex pair has an update!")
             .setContentText(message)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
         val resultIntent = Intent(appContext, MainActivity::class.java)
 // Create the TaskStackBuilder
         val resultPendingIntent: PendingIntent? = TaskStackBuilder.create(appContext).run {
-            // Add the intent, which inflates the back stack
             addNextIntentWithParentStack(resultIntent)
-            // Get the PendingIntent containing the entire back stack
             getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
         }
+
         builder.setContentIntent(resultPendingIntent)
         val channel = NotificationChannel(channelId, "Currency Channel", NotificationManager.IMPORTANCE_DEFAULT )
 

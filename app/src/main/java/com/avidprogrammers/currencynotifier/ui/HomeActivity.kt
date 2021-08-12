@@ -28,7 +28,7 @@ class HomeActivity : AppCompatActivity() {
 
         bottom_nav.itemIconTintList = null
 
-        val periodicWorkRequest= PeriodicWorkRequestBuilder<NotificationWorker>(60,TimeUnit.MINUTES).build()
+        val periodicWorkRequest= PeriodicWorkRequestBuilder<NotificationWorker>(60, TimeUnit.MINUTES).build()
 
 //        For Onetime notification testing
 //        val oneTimeWorkRequest= OneTimeWorkRequest.Builder(NotificationWorker::class.java).build()

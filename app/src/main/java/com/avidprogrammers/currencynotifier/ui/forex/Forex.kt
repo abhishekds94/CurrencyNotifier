@@ -168,7 +168,6 @@ class Forex : ScopedFragment(), KodeinAware {
 
         targetCountries.add(SpinnerCountryData("BDT", R.drawable.ic_bdt))
         targetCountries.add(SpinnerCountryData("BRL", R.drawable.ic_brl))
-        targetCountries.add(SpinnerCountryData("BTC", R.drawable.ic_btc))
         targetCountries.add(SpinnerCountryData("CAD", R.drawable.ic_cad))
         targetCountries.add(SpinnerCountryData("CHF", R.drawable.ic_chf))
 
