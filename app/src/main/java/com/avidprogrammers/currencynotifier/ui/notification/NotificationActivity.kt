@@ -19,6 +19,10 @@ import androidx.core.app.NavUtils
 import android.content.Intent
 import androidx.core.app.TaskStackBuilder
 import com.avidprogrammers.currencynotifier.ui.HomeActivity
+import com.avidprogrammers.currencynotifier.ui.forex.firebaseAnalytics
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 
 class NotificationActivity : AppCompatActivity(), KodeinAware {
     override val kodein by closestKodein()
@@ -34,6 +38,12 @@ class NotificationActivity : AppCompatActivity(), KodeinAware {
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         init()
+
+        firebaseAnalytics = Firebase.analytics
+
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "notification history")
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

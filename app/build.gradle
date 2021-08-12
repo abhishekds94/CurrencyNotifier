@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: "kotlin-kapt"
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 def apikeyPropertiesFile = rootProject.file("api.properties")
 def apikeyProperties = new Properties()
@@ -50,6 +51,7 @@ android {
 dependencies {
     implementation platform('com.google.firebase:firebase-bom:28.3.1')
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.21"
     implementation 'androidx.core:core-ktx:1.6.0'

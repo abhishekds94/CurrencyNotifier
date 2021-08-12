@@ -22,6 +22,9 @@ import com.google.android.gms.ads.nativead.MediaView
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdOptions
 import com.google.android.gms.ads.nativead.NativeAdView
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.forex_bottom_sheet.*
 import kotlinx.android.synthetic.main.forex_fragment.*
 import kotlinx.coroutines.launch
@@ -32,6 +35,7 @@ import org.kodein.di.generic.instance
 const val AD_UNIT_ID = BuildConfig.ADMOB_INTERSTITIAL
 const val ADMOB_AD_UNIT_ID = BuildConfig.ADMOB_NATIVE
 var currentNativeAd: NativeAd? = null
+lateinit var firebaseAnalytics: FirebaseAnalytics
 
 class Forex : ScopedFragment(), KodeinAware {
     override val kodein by closestKodein()
@@ -61,6 +65,12 @@ class Forex : ScopedFragment(), KodeinAware {
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ForexViewModel::class.java)
 
+        firebaseAnalytics = Firebase.analytics
+
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "forex")
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+
         MobileAds.initialize(requireContext()) {}
 
         MobileAds.setRequestConfiguration(
@@ -83,17 +93,29 @@ class Forex : ScopedFragment(), KodeinAware {
             when {
                 sourceSelected == targetSelected -> {
                     SnackbarUtil.showErrorSnack(requireActivity(), "Source and Target Currencies cannot be same!")
+                    val bundle = Bundle()
+                    bundle.putString(FirebaseAnalytics.Param.CONTENT, "same currency error")
+                    firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
                 }
                 sourceSelected == "Select Source" -> {
                     SnackbarUtil.showErrorSnack(requireActivity(), "Select the Source Currency!")
+                    val bundle = Bundle()
+                    bundle.putString(FirebaseAnalytics.Param.CONTENT, "source currency error")
+                    firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
                 }
                 targetSelected == "Select Target" -> {
                     SnackbarUtil.showErrorSnack(requireActivity(), "Select the Target Currency!")
+                    val bundle = Bundle()
+                    bundle.putString(FirebaseAnalytics.Param.CONTENT, "target currency error")
+                    firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
                 }
                 else -> {
                     refreshAd()
                     showInterstitial()
                     bindUI()
+                    val bundle = Bundle()
+                    bundle.putString(FirebaseAnalytics.Param.CONTENT, "seen forex value")
+                    firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
                 }
             }
         }
@@ -125,6 +147,9 @@ class Forex : ScopedFragment(), KodeinAware {
         viewModel.selectedCurrencyPair(comboSelected)
 
         forexValText.text = getString(R.string.forexValText, sourceSelected, targetSelected)
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.CONTENT, "selected forex combo: $comboSelected")
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
 
     }
 
@@ -250,6 +275,9 @@ class Forex : ScopedFragment(), KodeinAware {
 
                 override fun onAdShowedFullScreenContent() {
                     Log.d("TAG", "Ad showed fullscreen content.")
+                    val bundle = Bundle()
+                    bundle.putString(FirebaseAnalytics.Param.AD_FORMAT, "interstitial loaded")
+                    firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
                     // Called when ad is dismissed.
                 }
             }
@@ -361,6 +389,14 @@ class Forex : ScopedFragment(), KodeinAware {
            domain: ${loadAdError.domain}, code: ${loadAdError.code}, message: ${loadAdError.message}
           """"
             }
+
+            override fun onAdImpression() {
+                super.onAdImpression()
+                val bundle = Bundle()
+                bundle.putString(FirebaseAnalytics.Param.AD_SOURCE, "native ad shown")
+                firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+            }
+
         }).build()
 
         adLoader.loadAd(AdRequest.Builder().build())

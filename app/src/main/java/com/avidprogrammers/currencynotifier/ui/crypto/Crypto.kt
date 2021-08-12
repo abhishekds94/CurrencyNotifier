@@ -7,6 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.avidprogrammers.currencynotifier.R
+import com.avidprogrammers.currencynotifier.ui.forex.firebaseAnalytics
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 
 class Crypto : Fragment() {
 
@@ -27,6 +31,13 @@ class Crypto : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(CryptoViewModel::class.java)
         // TODO: Use the ViewModel
+
+        firebaseAnalytics = Firebase.analytics
+
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "crypto")
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+
     }
 
 }

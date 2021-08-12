@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
@@ -24,6 +25,10 @@ import org.kodein.di.generic.instance
 import android.os.Looper
 import android.util.Log
 import com.avidprogrammers.currencynotifier.ui.MainActivity
+import com.avidprogrammers.currencynotifier.ui.forex.firebaseAnalytics
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import java.lang.Exception
 
 
@@ -73,6 +78,12 @@ class NotificationWorker(val appContext: Context,workerParameters: WorkerParamet
             addNextIntentWithParentStack(resultIntent)
             getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
         }
+
+        firebaseAnalytics = Firebase.analytics
+
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.CONTENT, "notification shown")
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
 
         builder.setContentIntent(resultPendingIntent)
         val channel = NotificationChannel(channelId, "Currency Channel", NotificationManager.IMPORTANCE_DEFAULT )

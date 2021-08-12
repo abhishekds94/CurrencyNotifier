@@ -15,6 +15,9 @@ import com.avidprogrammers.currencynotifier.ui.notification.ForexNotificationVie
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.forex_bottom_sheet.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -85,6 +88,12 @@ class MyBottomSheetDialogFragment : BottomSheetDialogFragment(),KodeinAware {
             }
         }
 
+        firebaseAnalytics = Firebase.analytics
+
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.CONTENT, "bottomsheet opened")
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+
         bt_setNotification.setOnClickListener {
 
             if (valueOne.text.isNotEmpty() && valueTwo.text.isNotEmpty() && valueThree.text.isNotEmpty() && valueFour.text.isNotEmpty() && valueFive.text.isNotEmpty()){
@@ -129,6 +138,12 @@ class MyBottomSheetDialogFragment : BottomSheetDialogFragment(),KodeinAware {
                     SnackbarUtil.showActionSnack(requireActivity(),
                         "Alert created with a value: $enteredVal"
                     )
+
+                    firebaseAnalytics = Firebase.analytics
+
+                    val bundle = Bundle()
+                    bundle.putString(FirebaseAnalytics.Param.CONTENT, "entered val: $enteredVal")
+                    firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
                 }
 
             } else if (valueOne.text.isEmpty()){
