@@ -10,10 +10,7 @@ import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.avidprogrammers.currencynotifier.BuildConfig
 import com.avidprogrammers.currencynotifier.data.forex.ForexValue
-import com.google.android.gms.ads.AdError
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.*
 import com.google.android.gms.ads.appopen.AppOpenAd
 import com.google.android.gms.ads.appopen.AppOpenAd.AppOpenAdLoadCallback
 import java.util.*
@@ -87,7 +84,7 @@ class AppOpenManager(myApplication: ForexValue) : LifecycleObserver,
             loadCallback!!
         )
     }
-
+//    .setTestDeviceIds(Arrays.asList("8262955E063A02F1F3DA99CEE3B1AB67"))
     private val adRequest: AdRequest
         get() = AdRequest.Builder().build()
 
@@ -118,7 +115,7 @@ class AppOpenManager(myApplication: ForexValue) : LifecycleObserver,
 
     companion object {
         private const val LOG_TAG = "AppOpenManager"
-        private const val AD_UNIT_ID = BuildConfig.ADMOB_APPOPEN
+        private const val AD_UNIT_ID = "ca-app-pub-3940256099942544/3419835294"
         private var isShowingAd = false
     }
 

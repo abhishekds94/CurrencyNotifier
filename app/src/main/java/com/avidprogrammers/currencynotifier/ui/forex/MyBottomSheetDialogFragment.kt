@@ -118,7 +118,7 @@ class MyBottomSheetDialogFragment : BottomSheetDialogFragment(),KodeinAware {
                 val f= viewModel.forex.value
 
                 f?.let {
-
+                    if(it.currencyCode!=null&&it.currencyVal!=null){
                     //For Date
                     val localDate: LocalDate = LocalDate.now()
                     val formatter: DateTimeFormatter =
@@ -134,7 +134,6 @@ class MyBottomSheetDialogFragment : BottomSheetDialogFragment(),KodeinAware {
                     notificationViewModel.insertForex(Forex(null,it.currencyCode,it.currencyVal,enteredVal,"In Progress",
                         "$formattedString $time",System.currentTimeMillis()))
 
-                    dismiss()
                     SnackbarUtil.showActionSnack(requireActivity(),
                         "Alert created with a value: $enteredVal"
                     )
@@ -144,7 +143,8 @@ class MyBottomSheetDialogFragment : BottomSheetDialogFragment(),KodeinAware {
                     val bundle = Bundle()
                     bundle.putString(FirebaseAnalytics.Param.CONTENT, "entered val: $enteredVal")
                     firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
-                }
+                }}
+                dismiss()
 
             } else if (valueOne.text.isEmpty()){
                 valueOne.requestFocus()

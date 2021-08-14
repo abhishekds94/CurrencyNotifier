@@ -13,7 +13,7 @@ interface ForexValueDao {
     suspend fun upsert(ForexResponse: ForexResponseDB)
 
     @Query("select * from forex_value where id = $FOREX_VALUE_ID")
-    fun getForexValue(): Flow<ForexResponseDB>
+    fun getForexValue(): Flow<ForexResponseDB?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(forex: Forex)

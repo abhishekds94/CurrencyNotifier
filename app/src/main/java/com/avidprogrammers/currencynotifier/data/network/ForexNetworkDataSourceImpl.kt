@@ -1,11 +1,10 @@
 package com.avidprogrammers.currencynotifier.data.network
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.avidprogrammers.currencynotifier.data.forex.ForexApiService
+import com.avidprogrammers.currencynotifier.data.forex.Response
 import com.avidprogrammers.currencynotifier.data.network.response.ForexResponse
-import com.avidprogrammers.currencynotifier.internal.NoConnectivityException
 
 class ForexNetworkDataSourceImpl(
     private val forexApiService: ForexApiService
@@ -15,15 +14,18 @@ class ForexNetworkDataSourceImpl(
     override val downloadedForex: LiveData<ForexResponse>
         get() = _downloadedForex
 
-    override suspend fun fetchCurrentValue(currencyCode: String) {
-        try {
-            val fetchedCurrentValue = forexApiService
-                .getCurrentValueAsync(currencyCode)
-                .await()
-            _downloadedForex.postValue(fetchedCurrentValue)
-        } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No Internet Connection - ", e)
-        }
+    override suspend fun fetchCurrentValue(currencyCode: String): ForexResponse {
+
+        return forexApiService
+            .getCurrentValueAsync(currencyCode)
+            .await()
+        // _downloadedForex.postValue(fetchedCurrentValue)
+
 
     }
+
+    override suspend fun fetchValue(): List<Response> {
+        TODO("Not yet implemented")
+    }
+
 }

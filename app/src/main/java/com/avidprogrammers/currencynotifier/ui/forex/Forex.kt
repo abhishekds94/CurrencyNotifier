@@ -8,10 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.avidprogrammers.currencynotifier.BuildConfig
 import com.avidprogrammers.currencynotifier.R
+import com.avidprogrammers.currencynotifier.data.forex.ForexApiService
+import com.avidprogrammers.currencynotifier.data.network.ConnectivityInterceptorImpl
+import com.avidprogrammers.currencynotifier.data.network.ForexNetworkDataSourceImpl
 import com.avidprogrammers.currencynotifier.ui.SnackbarUtil
 import com.avidprogrammers.currencynotifier.ui.base.ScopedFragment
 import com.avidprogrammers.currencynotifier.ui.notification.NotificationActivity
@@ -31,6 +36,7 @@ import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import java.lang.Exception
 
 const val AD_UNIT_ID = BuildConfig.ADMOB_INTERSTITIAL
 const val ADMOB_AD_UNIT_ID = BuildConfig.ADMOB_NATIVE
@@ -75,7 +81,7 @@ class Forex : ScopedFragment(), KodeinAware {
 
         MobileAds.setRequestConfiguration(
             RequestConfiguration.Builder()
-                .setTestDeviceIds(listOf("ABCDEF012345"))
+                .setTestDeviceIds(listOf("8262955E063A02F1F3DA99CEE3B1AB67"))
                 .build()
         )
 
@@ -112,7 +118,7 @@ class Forex : ScopedFragment(), KodeinAware {
                 else -> {
                     refreshAd()
                     showInterstitial()
-                    bindUI()
+                   bindUI()
                     val bundle = Bundle()
                     bundle.putString(FirebaseAnalytics.Param.CONTENT, "seen forex value")
                     firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
@@ -130,22 +136,20 @@ class Forex : ScopedFragment(), KodeinAware {
 
     }
 
-    private fun bindUI() = launch {
+    private fun bindUI() = lifecycleScope.launch {
         forexValueContainer.visibility = View.VISIBLE
         val currentValue = viewModel.forex
-        currentValue.observe(viewLifecycleOwner, Observer {
-            if (it == null) return@Observer
-            if (comboSelected == "USDBTC" || comboSelected == "GBPBTC" || comboSelected == "EURBTC") {
-                forexValue.text = it.currencyVal
-            } else {
-                val number: Float = it.currencyVal.toFloat()
-                val number2digits: Float = String.format("%.2f", number).toFloat()
-                forexValue.text = number2digits.toString()
+        currentValue.observe(viewLifecycleOwner, {
+            it?.let {
+                it.currencyVal?.let {
+                    val number: Float = it.toFloat()
+                    val number2digits: Float = String.format("%.2f", number).toFloat()
+                    forexValue.text = number2digits.toString()
+                }
             }
         })
         comboSelected = sourceSelected + targetSelected
         viewModel.selectedCurrencyPair(comboSelected)
-
         forexValText.text = getString(R.string.forexValText, sourceSelected, targetSelected)
         val bundle = Bundle()
         bundle.putString(FirebaseAnalytics.Param.CONTENT, "selected forex combo: $comboSelected")

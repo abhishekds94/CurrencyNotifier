@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface ForexRepository {
     suspend fun getCurrentValue(value: String)
-    fun getCurrentForexValue(): Flow<ForexResponseDB>
+    fun getCurrentForexValue(): Flow<ForexResponseDB?>
 }

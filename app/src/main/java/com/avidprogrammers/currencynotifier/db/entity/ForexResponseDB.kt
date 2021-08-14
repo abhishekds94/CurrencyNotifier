@@ -8,8 +8,8 @@ const val FOREX_VALUE_ID = 0
 @Entity(tableName = "forex_value")
 
 data class ForexResponseDB(
-    var currencyCode: String,
-    var currencyVal: String
+    var currencyCode: String?,
+    var currencyVal: String?
 ) {
     @PrimaryKey(autoGenerate = false)
     var id: Int = FOREX_VALUE_ID

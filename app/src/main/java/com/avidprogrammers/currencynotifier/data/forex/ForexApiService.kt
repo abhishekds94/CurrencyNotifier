@@ -15,7 +15,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 const val BASE_URL = BuildConfig.API_URL
-
 interface ForexApiService {
 
     @Keep
@@ -23,6 +22,10 @@ interface ForexApiService {
     fun getCurrentValueAsync(
         @Query("val") currencyCode: String
     ): Deferred<ForexResponse>
+
+/*    @Keep
+    @GET("hiring.json")
+    fun getValueAsync():Deferred<List<Response>>*/
 
     @Keep
     @GET("api/currency")
