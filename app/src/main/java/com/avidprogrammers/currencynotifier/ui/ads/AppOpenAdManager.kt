@@ -115,7 +115,7 @@ class AppOpenManager(myApplication: ForexValue) : LifecycleObserver,
 
     companion object {
         private const val LOG_TAG = "AppOpenManager"
-        private const val AD_UNIT_ID = "ca-app-pub-3940256099942544/3419835294"
+        private const val AD_UNIT_ID = BuildConfig.ADMOB_APPOPEN
         private var isShowingAd = false
     }
 
