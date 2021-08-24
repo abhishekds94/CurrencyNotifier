@@ -199,22 +199,20 @@ class Forex : ScopedFragment(), KodeinAware {
         targetCountries.add(SpinnerCountryData("BRL", R.drawable.ic_brl))
         targetCountries.add(SpinnerCountryData("CAD", R.drawable.ic_cad))
         targetCountries.add(SpinnerCountryData("CHF", R.drawable.ic_chf))
-
         targetCountries.add(SpinnerCountryData("CNY", R.drawable.ic_cny))
+
         targetCountries.add(SpinnerCountryData("ETB", R.drawable.ic_etb))
         targetCountries.add(SpinnerCountryData("EUR", R.drawable.ic_euro))
         targetCountries.add(SpinnerCountryData("GBP", R.drawable.ic_gbp))
         targetCountries.add(SpinnerCountryData("INR", R.drawable.ic_inr))
-
-        targetCountries.add(SpinnerCountryData("IQD", R.drawable.ic_iqd))
-        targetCountries.add(SpinnerCountryData("IRR", R.drawable.ic_irr))
         targetCountries.add(SpinnerCountryData("JPY", R.drawable.ic_jpy))
+
         targetCountries.add(SpinnerCountryData("LKR", R.drawable.ic_lkr))
         targetCountries.add(SpinnerCountryData("MXN", R.drawable.ic_mxn))
-
         targetCountries.add(SpinnerCountryData("MYR", R.drawable.ic_myr))
         targetCountries.add(SpinnerCountryData("NGN", R.drawable.ic_ngn))
         targetCountries.add(SpinnerCountryData("RUB", R.drawable.ic_rub))
+
         targetCountries.add(SpinnerCountryData("USD", R.drawable.ic_usd))
         targetCountries.add(SpinnerCountryData("ZAR", R.drawable.ic_zar))
 

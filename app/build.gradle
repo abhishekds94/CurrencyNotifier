@@ -138,4 +138,10 @@ dependencies {
     //Lottie Library
     implementation 'com.airbnb.android:lottie:4.0.0'
 
+    //Spotlight Library
+    implementation 'com.github.takusemba:spotlight:2.0.5'
+
+    //appIntro Library
+    implementation 'com.github.AppIntro:AppIntro:6.1.0'
+
 }

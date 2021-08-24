@@ -10,5 +10,14 @@
 
     <color name="background">#edf0f2</color>
 
+    <color name="introOneStart">#764BA2</color>
+    <color name="introOneEnd">#667EEA</color>
+
+    <color name="introTwoStart">#D4145A</color>
+    <color name="introTwoEnd">#FBB03B</color>
+
+    <color name="introThreeStart">#D8B5FF</color>
+    <color name="introThreeEnd">#1EAE98</color>
+
 
 </resources>

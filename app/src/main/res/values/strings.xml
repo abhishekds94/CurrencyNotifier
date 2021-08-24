@@ -11,4 +11,10 @@
     <string name="privacy_policy"><u>Privacy Policy</u></string>
     <string name="dash">|</string>
     <string name="terms_and_conditions"><u><![CDATA[Terms & Conditions]]></u></string>
+    <string name="welcome">Welcome!</string>
+    <string name="intro_one_text">Now check live Forex values and set notifications from 60+ pairs.\nNever miss a highest rate</string>
+    <string name="live_forex_values">Live Forex Values!</string>
+    <string name="intro_two_text">Select a currency pair and enter your desired amount for the notification and relax, we will notifiy you when your desired value is reached.\n\nSimple, isn\'t it?</string>
+    <string name="notifications">Notifications!</string>
+    <string name="always_keep_track_of_the_notifications_at_your_finger_tips">Always keep track of the notifications at your finger tips</string>
 </resources>

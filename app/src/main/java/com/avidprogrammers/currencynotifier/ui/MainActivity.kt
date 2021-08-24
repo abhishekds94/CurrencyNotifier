@@ -1,10 +1,13 @@
 package com.avidprogrammers.currencynotifier.ui
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.avidprogrammers.currencynotifier.R
 import com.avidprogrammers.currencynotifier.data.forex.ForexValue
@@ -13,15 +16,13 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
-import android.R.id
-
-
 
 
 class MainActivity : AppCompatActivity() {
 
     var appOpenManager: AppOpenManager? = null
     private lateinit var firebaseAnalytics: FirebaseAnalytics
+    lateinit var shared : SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         appOpenManager = AppOpenManager(applicationContext as ForexValue)
+        appOpenManager!!.fetchAd()
 
         privacyPolicy.setOnClickListener{
             val browserIntent = Intent(Intent.ACTION_VIEW)
@@ -55,10 +57,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         Handler().postDelayed({
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
-            finish()
-            appOpenManager!!.showAdIfAvailable()
+            shared = getSharedPreferences("fO" , Context.MODE_PRIVATE)
+
+            val firstOpen = shared.getString("fO" , "true" )
+
+            if (firstOpen == "true"){
+                val appOpenIntent = Intent(this, FirstTimeAppIntro::class.java)
+                startActivity(appOpenIntent)
+                finish()
+                val edit = shared.edit()
+                edit.putString("fO" , "false")
+                edit.apply()
+            } else {
+                appOpenManager!!.isAdAvailable
+                appOpenManager!!.showAdIfAvailable()
+                val openIntent = Intent(this, HomeActivity::class.java)
+                startActivity(openIntent)
+                finish()
+            }
         }, 3000)
     }
 }

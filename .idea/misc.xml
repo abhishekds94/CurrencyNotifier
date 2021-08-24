@@ -16,10 +16,20 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.36875" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.36875" />
         <entry key="app/src/main/res/drawable/ic_notification.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/intro_bg_one.xml" value="0.36875" />
+        <entry key="app/src/main/res/drawable/intro_bg_one_end.xml" value="0.36875" />
+        <entry key="app/src/main/res/drawable/intro_bg_three.xml" value="0.36875" />
+        <entry key="app/src/main/res/drawable/intro_bg_three_end.xml" value="0.36875" />
+        <entry key="app/src/main/res/drawable/intro_bg_two.xml" value="0.36875" />
+        <entry key="app/src/main/res/drawable/intro_bg_two_end.xml" value="0.36875" />
+        <entry key="app/src/main/res/drawable/intro_one_anim.xml" value="0.36875" />
         <entry key="app/src/main/res/drawable/notification_bg.xml" value="0.36875" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.3138586956521739" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/activity_notification.xml" value="0.35260416666666666" />
+        <entry key="app/src/main/res/layout/app_intro_one.xml" value="0.35260416666666666" />
+        <entry key="app/src/main/res/layout/app_intro_three.xml" value="0.35260416666666666" />
+        <entry key="app/src/main/res/layout/app_intro_two.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/crypto_fragment.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/forex_bottom_sheet.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/forex_fragment.xml" value="0.35260416666666666" />

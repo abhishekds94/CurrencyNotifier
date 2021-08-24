@@ -35,7 +35,9 @@ class AppOpenManager(myApplication: ForexValue) : LifecycleObserver,
                         fetchAd()
                     }
 
-                    override fun onAdFailedToShowFullScreenContent(adError: AdError) {}
+                    override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                        Log.d(LOG_TAG, "Can not show ad."+adError)
+                    }
                     override fun onAdShowedFullScreenContent() {
                         isShowingAd = true
                     }
