@@ -50,6 +50,8 @@ class Forex : ScopedFragment(), KodeinAware {
     private var mInterstitialAd: InterstitialAd? = null
     private var mAdIsLoading: Boolean = false
 
+    private var adCounter = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -111,11 +113,20 @@ class Forex : ScopedFragment(), KodeinAware {
                 }
                 else -> {
                     refreshAd()
-                    showInterstitial()
-                   bindUI()
-                    val bundle = Bundle()
-                    bundle.putString(FirebaseAnalytics.Param.CONTENT, "seen forex value")
-                    firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+                    adCounter++
+                    if (adCounter % 2 == 0){
+                        showInterstitial()
+                        bindUI()
+                        val bundle = Bundle()
+                        bundle.putString(FirebaseAnalytics.Param.CONTENT, "seen forex value")
+                        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+                    } else {
+                        bindUI()
+                        val bundle = Bundle()
+                        bundle.putString(FirebaseAnalytics.Param.CONTENT, "seen forex value")
+                        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+                    }
+
                 }
             }
         }

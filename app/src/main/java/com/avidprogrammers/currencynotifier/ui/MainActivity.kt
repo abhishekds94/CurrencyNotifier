@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() {
         )
 
         appOpenManager = AppOpenManager(applicationContext as ForexValue)
-        appOpenManager!!.fetchAd()
 
         privacyPolicy.setOnClickListener{
             val browserIntent = Intent(Intent.ACTION_VIEW)
@@ -68,11 +67,10 @@ class MainActivity : AppCompatActivity() {
                 edit.putString("fO" , "false")
                 edit.apply()
             } else {
-                appOpenManager!!.isAdAvailable
-                appOpenManager!!.showAdIfAvailable()
                 val openIntent = Intent(this, HomeActivity::class.java)
                 startActivity(openIntent)
                 finish()
+                appOpenManager!!.showAdIfAvailable()
             }
         }, 3000)
     }

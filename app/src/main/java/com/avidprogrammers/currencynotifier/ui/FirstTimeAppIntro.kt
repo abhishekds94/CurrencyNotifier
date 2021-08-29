@@ -44,7 +44,6 @@ class FirstTimeAppIntro: AppIntro() {
 
     override fun onDonePressed(currentFragment: Fragment?) {
         super.onDonePressed(currentFragment)
-        appOpenManager!!.showAdIfAvailable()
         val openIntent = Intent(this, HomeActivity::class.java)
         startActivity(openIntent)
         finish()
