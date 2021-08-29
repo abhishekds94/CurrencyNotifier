@@ -1,7 +1,6 @@
 package com.avidprogrammers.currencynotifier.data.forex.repository
 
 import android.util.Log
-import android.widget.Toast
 import com.avidprogrammers.currencynotifier.data.network.ForexNetworkDataSource
 import com.avidprogrammers.currencynotifier.data.network.response.ForexResponse
 import com.avidprogrammers.currencynotifier.db.ForexValueDao

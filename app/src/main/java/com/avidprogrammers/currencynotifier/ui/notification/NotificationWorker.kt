@@ -8,7 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.widget.Toast
+import android.os.Looper
 import androidx.core.app.NotificationCompat
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
@@ -17,19 +17,16 @@ import com.avidprogrammers.currencynotifier.data.forex.ForexApiService
 import com.avidprogrammers.currencynotifier.data.forex.ForexSharedPrefUtil
 import com.avidprogrammers.currencynotifier.data.network.ConnectivityInterceptorImpl
 import com.avidprogrammers.currencynotifier.data.network.response.ForexResponse
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.closestKodein
-import org.kodein.di.generic.instance
-import android.os.Looper
-import android.util.Log
 import com.avidprogrammers.currencynotifier.ui.MainActivity
 import com.avidprogrammers.currencynotifier.ui.forex.firebaseAnalytics
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
-import java.lang.Exception
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.closestKodein
+import org.kodein.di.generic.instance
 
 
 class NotificationWorker(val appContext: Context,workerParameters: WorkerParameters):

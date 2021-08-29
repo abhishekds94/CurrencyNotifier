@@ -3,14 +3,11 @@ package com.avidprogrammers.currencynotifier.ui.notification
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.avidprogrammers.currencynotifier.R
-import kotlinx.android.synthetic.main.forex_fragment.*
-import org.w3c.dom.Text
 
 class NotificationAdapter : ListAdapter<Forex, NotificationAdapter.NotificationViewHolder>(DIFFUTIL){
 

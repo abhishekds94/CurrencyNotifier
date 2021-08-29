@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.avidprogrammers.currencynotifier.R
 import com.avidprogrammers.currencynotifier.data.forex.ForexValue

@@ -1,8 +1,6 @@
 package com.avidprogrammers.currencynotifier.ui.notification
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.avidprogrammers.currencynotifier.data.network.response.ForexResponse
 import com.avidprogrammers.currencynotifier.db.ForexValueDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

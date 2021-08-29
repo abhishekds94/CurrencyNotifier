@@ -1,25 +1,13 @@
 package com.avidprogrammers.currencynotifier.ui
 
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.view.View
-import com.google.android.material.snackbar.Snackbar
-import android.R
-import android.content.Intent
-import android.provider.Settings.Global.getString
-import android.widget.Button
-import androidx.constraintlayout.widget.ConstraintLayout
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_home.*
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getColor
-import androidx.fragment.app.FragmentContainerView
 import com.avidprogrammers.currencynotifier.ui.notification.NotificationActivity
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.activity_home.bottom_nav
-import kotlinx.android.synthetic.main.activity_home.view.*
-import kotlinx.android.synthetic.main.forex_bottom_sheet.*
-import kotlinx.coroutines.withContext
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_home.*
 
 
 object SnackbarUtil {

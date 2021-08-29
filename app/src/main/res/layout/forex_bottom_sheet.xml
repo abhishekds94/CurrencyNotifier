@@ -14,7 +14,6 @@
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toBottomOf="@+id/ll_layout" />
 
     <View
@@ -32,7 +31,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Enter the target value for the notification"
+        android:text="@string/bottom_sheet_header"
         android:textAlignment="center"
         android:fontFamily="@font/open_sans_semibold"
         android:textSize="18sp"
@@ -60,7 +59,7 @@
             android:textSize="28sp"
             android:gravity="center"
             android:maxLength="1"
-            android:hint="0"
+            android:hint="@string/zero"
             android:layout_marginEnd="10dp"
             android:inputType="number"/>
 
@@ -71,7 +70,7 @@
             android:textSize="28sp"
             android:gravity="center"
             android:maxLength="1"
-            android:hint="9"
+            android:hint="@string/nine"
             android:layout_marginEnd="10dp"
             android:inputType="number"/>
 
@@ -82,7 +81,7 @@
             android:textSize="28sp"
             android:gravity="center"
             android:maxLength="1"
-            android:hint="9"
+            android:hint="@string/nine"
             android:layout_marginEnd="10dp"
             android:inputType="number"/>
 
@@ -90,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:textSize="28sp"
-            android:text="."
+            android:text="@string/dot"
             android:gravity="bottom"
             android:textColor="@color/black"
             android:layout_marginEnd="10dp"/>
@@ -102,7 +101,7 @@
             android:textSize="28sp"
             android:gravity="center"
             android:maxLength="1"
-            android:hint="1"
+            android:hint="@string/nine"
             android:layout_marginEnd="10dp"
             android:inputType="number"/>
 
@@ -113,7 +112,7 @@
             android:textSize="28sp"
             android:gravity="center"
             android:maxLength="1"
-            android:hint="0"
+            android:hint="@string/zero"
             android:layout_marginEnd="10dp"
             android:inputType="number"/>
 
@@ -124,7 +123,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_button_notification"
-        android:text="Notify me!"
+        android:text="@string/bottom_sheet_button"
         android:textSize="18sp"
         android:layout_marginTop="20dp"
         android:layout_marginStart="40dp"

@@ -1,13 +1,11 @@
 package com.avidprogrammers.currencynotifier.db
 
 import android.content.Context
-import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import androidx.work.impl.WorkDatabaseMigrations.MIGRATION_3_4
 import com.avidprogrammers.currencynotifier.db.entity.ForexResponseDB
 import com.avidprogrammers.currencynotifier.ui.notification.Forex
 

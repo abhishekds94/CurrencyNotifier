@@ -1,28 +1,27 @@
 package com.avidprogrammers.currencynotifier.ui.notification
 
+import android.content.Intent
 import android.graphics.Rect
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NavUtils
+import androidx.core.app.TaskStackBuilder
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.avidprogrammers.currencynotifier.R
-import kotlinx.android.synthetic.main.activity_notification.*
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.closestKodein
-import org.kodein.di.generic.instance
-import androidx.core.app.NavUtils
-
-import android.content.Intent
-import androidx.core.app.TaskStackBuilder
 import com.avidprogrammers.currencynotifier.ui.HomeActivity
 import com.avidprogrammers.currencynotifier.ui.forex.firebaseAnalytics
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_notification.*
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.closestKodein
+import org.kodein.di.generic.instance
 
 class NotificationActivity : AppCompatActivity(), KodeinAware {
     override val kodein by closestKodein()

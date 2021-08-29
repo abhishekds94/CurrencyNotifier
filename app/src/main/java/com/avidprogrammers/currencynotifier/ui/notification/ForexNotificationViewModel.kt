@@ -1,6 +1,9 @@
 package com.avidprogrammers.currencynotifier.ui.notification
 
-import androidx.lifecycle.*
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
 class ForexNotificationViewModel(private val forexNotificationRepository: ForexNotificationRepository):ViewModel() {

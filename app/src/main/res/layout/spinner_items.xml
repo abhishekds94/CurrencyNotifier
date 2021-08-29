@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:toolsNs="http://schemas.android.com/tools"
     android:orientation="horizontal">
 
     <ImageView
@@ -11,14 +12,14 @@
         android:src="@mipmap/ic_launcher"
         android:layout_marginStart="5dp"
         android:padding="7dp"
-        android:contentDescription="spinnerImg" />
+        android:contentDescription="@string/spinnerimg" />
 
     <TextView
         android:id="@+id/sourceForexName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Demoardgfaergaergaergaergaergaeraergaeragragaergsedrg"
+        toolsNs:text="Demoardgfaergaergaergaergaergaeraergaeragragaergsedrg"
         android:fontFamily="@font/open_sans"
         android:textColor="@color/black"
         android:textSize="16sp"

@@ -17,4 +17,15 @@
     <string name="intro_two_text">Select a currency pair and enter your desired amount for the notification and relax, we will notifiy you when your desired value is reached.\n\nSimple, isn\'t it?</string>
     <string name="notifications">Notifications!</string>
     <string name="always_keep_track_of_the_notifications_at_your_finger_tips">Always keep track of the notifications at your finger tips</string>
+    <string name="nine">9</string>
+    <string name="zero">0</string>
+    <string name="dot">.</string>
+    <string name="bottom_sheet_header">Enter the target value for the notification</string>
+    <string name="bottom_sheet_button">Notify me!</string>
+    <string name="forex_pair">Forex Pair:</string>
+    <string name="scheduled_time">Scheduled time:</string>
+    <string name="current_value">Current Value</string>
+    <string name="target_value">Target Value:</string>
+    <string name="notification_status">Notification Status:</string>
+    <string name="spinnerimg">spinnerImg</string>
 </resources>

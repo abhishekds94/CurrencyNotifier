@@ -8,15 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.lifecycle.LifecycleCoroutineScope
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.avidprogrammers.currencynotifier.BuildConfig
 import com.avidprogrammers.currencynotifier.R
-import com.avidprogrammers.currencynotifier.data.forex.ForexApiService
-import com.avidprogrammers.currencynotifier.data.network.ConnectivityInterceptorImpl
-import com.avidprogrammers.currencynotifier.data.network.ForexNetworkDataSourceImpl
 import com.avidprogrammers.currencynotifier.ui.SnackbarUtil
 import com.avidprogrammers.currencynotifier.ui.base.ScopedFragment
 import com.avidprogrammers.currencynotifier.ui.notification.NotificationActivity
@@ -36,7 +31,6 @@ import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import java.lang.Exception
 
 const val AD_UNIT_ID = BuildConfig.ADMOB_INTERSTITIAL
 const val ADMOB_AD_UNIT_ID = BuildConfig.ADMOB_NATIVE

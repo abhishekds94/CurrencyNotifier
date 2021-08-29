@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.avidprogrammers.currencynotifier.R
 import com.avidprogrammers.currencynotifier.ui.SnackbarUtil
 import com.avidprogrammers.currencynotifier.ui.notification.Forex
-import com.avidprogrammers.currencynotifier.ui.notification.ForexNotificationViewModelFactory
 import com.avidprogrammers.currencynotifier.ui.notification.ForexNotificationViewModel
+import com.avidprogrammers.currencynotifier.ui.notification.ForexNotificationViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
