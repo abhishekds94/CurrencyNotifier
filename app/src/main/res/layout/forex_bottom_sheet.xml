@@ -134,4 +134,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll_layout" />
 
+    <TextView
+        android:id="@+id/textView_notification"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="** Notification check happens at every 60 minutes **"
+        android:textAlignment="center"
+        android:fontFamily="@font/open_sans"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_setNotification" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
